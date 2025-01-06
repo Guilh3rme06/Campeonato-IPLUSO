@@ -69,11 +69,11 @@ public class App {
                     }
                     break;
                 case 7:
-                    System.out.println("Saindo...");
+                    System.out.println("A Sair...");
                     scanner.close();
                     return;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opção inválida.");
             }
         }
     }
