@@ -65,7 +65,7 @@ public class App {
                         Arbitro arbitroPartida = arbitros.get(0);
 
                         PartidaSingulares partida = new PartidaSingulares(jogador1, jogador2, arbitroPartida);
-                        partida.partidaSingular();
+                        partida.determinarVencedor();
                     }
                     break;
                 case 7:
