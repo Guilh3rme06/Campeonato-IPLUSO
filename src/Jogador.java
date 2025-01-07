@@ -11,8 +11,8 @@ public class Jogador extends Pessoa {
      * Construtor da classe Jogador.
      * @param nome Nome do jogador.
      * @param idade Idade do jogador.
-     * @param genero Gênero do jogador.     
-     * @param ranking Ranking do jogador.
+     * @param genero Gênero do jogador.
+     * @param rankings Ranking do jogador.
      * @param partidasJogadas Número de partidas jogadas pelo jogador.
      */
     public Jogador(String nome, int idade, char genero, int rankings, int partidasJogadas) {
@@ -20,20 +20,35 @@ public class Jogador extends Pessoa {
         this.rankings = rankings;
         this.partidasJogadas = partidasJogadas;
     }
-    
-    // Getters e Setters
+
+    /**
+     * Obtém o ranking do jogador.
+     * @return Ranking do jogador.
+     */
     public int getRankings() {
         return rankings;
     }
 
-    public int getPartidasJogadas() {
-        return partidasJogadas;
-    }
-
+    /**
+     * Define o ranking do jogador.
+     * @param rankings Ranking do jogador.
+     */
     public void setRankings(int rankings) {
         this.rankings = rankings;
     }
 
+    /**
+     * Obtém o número de partidas jogadas pelo jogador.
+     * @return Número de partidas jogadas pelo jogador.
+     */
+    public int getPartidasJogadas() {
+        return partidasJogadas;
+    }
+
+    /**
+     * Define o número de partidas jogadas pelo jogador.
+     * @param partidasJogadas Número de partidas jogadas pelo jogador.
+     */
     public void setPartidasJogadas(int partidasJogadas) {
         this.partidasJogadas = partidasJogadas;
     }

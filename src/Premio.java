@@ -1,7 +1,7 @@
 package src;
 
 /**
- * Classe que representa um premio no campeonato.
+ * Classe que representa um prêmio no campeonato.
  */
 public class Premio {
     private String tipo;
@@ -17,19 +17,34 @@ public class Premio {
         this.valor = valor;
     }
 
-    // Getters e Setters
+    /**
+     * Obtém o tipo do prêmio.
+     * @return Tipo do prêmio.
+     */
     public String getTipo() {
         return tipo;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
+    /**
+     * Define o tipo do prêmio.
+     * @param tipo Tipo do prêmio.
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Obtém o valor do prêmio.
+     * @return Valor do prêmio.
+     */
+    public double getValor() {
+        return valor;
+    }
+
+    /**
+     * Define o valor do prêmio.
+     * @param valor Valor do prêmio.
+     */
     public void setValor(double valor) {
         this.valor = valor;
     }
