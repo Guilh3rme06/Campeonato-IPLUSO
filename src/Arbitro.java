@@ -1,45 +1,29 @@
-import java.util.Scanner;
+package src;
 
+/**
+ * Classe que representa um árbitro no campeonato.
+ */
 public class Arbitro extends Pessoa {
     private String certificacoes;
 
-    // Construtor
+    /**
+     * Construtor da classe Arbitro.
+     * @param nome Nome do árbitro.
+     * @param idade Idade do árbitro.
+     * @param genero Gênero do árbitro.
+     * @param certificacoes Certificações do árbitro.
+     */
     public Arbitro(String nome, int idade, char genero, String certificacoes) {
         super(nome, idade, genero);
         this.certificacoes = certificacoes;
     }
     
-    // Getter
+    // Getter e Setter
     public String getCertificacoes() {
         return certificacoes;
     }
 
-    // Setter
     public void setCertificacoes(String certificacoes) {
         this.certificacoes = certificacoes;
-    }
-
-    @Override
-    public void registro(Scanner scanner) {
-        System.out.println("Nome: ");
-        setNome(scanner.nextLine());
-
-        System.out.println("Idade: ");
-        setIdade(scanner.nextInt());
-        scanner.nextLine();
-
-        System.out.println("Género: ");
-        setGenero(scanner.next().charAt(0));
-        scanner.nextLine();
-
-        System.out.println("Certificações: ");
-        setCertificacoes(scanner.nextLine());
-    }
-
-    public void exibirArbitro() {
-        System.out.println("Nome: " + getNome());
-        System.out.println("Idade: " + getIdade());
-        System.out.println("Género: " + getGenero());
-        System.out.println("Certificações: " + getCertificacoes());
     }
 }

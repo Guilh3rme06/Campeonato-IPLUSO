@@ -1,11 +1,19 @@
-import java.util.Scanner;
+package src;
 
+/**
+ * Classe abstrata que representa uma pessoa no campeonato.
+ */
 public abstract class Pessoa {
     private String nome;
     private int idade;
     private char genero;
 
-    // Construtor
+    /**
+     * Construtor da classe Pessoa.
+     * @param nome Nome da pessoa.
+     * @param idade Idade da pessoa.
+     * @param genero Gênero da pessoa.
+     */
     public Pessoa(String nome, int idade, char genero) {
         this.nome = nome;
         this.idade = idade;
@@ -36,7 +44,4 @@ public abstract class Pessoa {
     public void setGenero(char genero) {
         this.genero = genero;
     }
-
-    // Registro
-    public abstract void registro(Scanner scanner);
 }
