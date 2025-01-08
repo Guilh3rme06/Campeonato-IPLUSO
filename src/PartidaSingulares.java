@@ -1,5 +1,5 @@
 import java.util.Random;
-
+import java.util.Scanner;
 public class PartidaSingulares implements ControloPartida{
     private Jogador jogador1;
     private Jogador jogador2;
@@ -32,6 +32,27 @@ public class PartidaSingulares implements ControloPartida{
     }
     @Override
     public Jogador determinarVencedor(){
+        Scanner jogadores = new Scanner(System.in);
+        System.out.println("Defina o genero da partida:");
+        String genero = jogadores.nextLine();
+        if (genero.equals("M")) {
+            System.out.println("Jogo masculino");
+            System.out.println("Insira o jogador1:");
+            String nome1 = jogadores.nextLine();
+            jogador1.setNome(nome1);
+            System.out.println("Insira o jogador2:");
+            String nome2 = jogadores.nextLine();
+            jogador2.setNome(nome2);
+        }else{
+            System.out.println("Jogo Feminino");
+            System.out.println("Insira o jogador1:");
+            String nome1 = jogadores.nextLine();
+            jogador1.setNome(nome1);
+            System.out.println("Insira o jogador2:");
+            String nome2 = jogadores.nextLine();
+            jogador2.setNome(nome2);
+
+        }
         this.jogador1.setPartidasJogadas(jogador1.getPartidasJogadas() + 1);
         this.jogador2.setPartidasJogadas(jogador2.getPartidasJogadas() + 1);
 
