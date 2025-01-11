@@ -5,6 +5,7 @@ import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Classe que representa a interface gráfica do sistema.
@@ -230,38 +231,90 @@ public class GUI {
 
     private void gerarTorneio() {
         JFrame frameTorneio = new JFrame("Gerar/Controlar Torneio");
-        frameTorneio.setSize(400, 200);
+        frameTorneio.setSize(400, 300);
         frameTorneio.setLayout(new BorderLayout());
 
         JPanel panelTorneio = new JPanel();
-        panelTorneio.setLayout(new GridLayout(3, 1, 10, 10));
+        panelTorneio.setLayout(new GridLayout(5, 2, 10, 10));
         panelTorneio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JButton btnTorneioSingulares = new JButton("Torneio Singulares");
-        JButton btnTorneioDuplas = new JButton("Torneio Duplas");
+        JLabel lblEscolhaGenero = new JLabel("Escolha o género:");
+        JComboBox<String> comboGenero = new JComboBox<>(new String[]{"Masculino", "Feminino"});
 
-        btnTorneioSingulares.addActionListener(new ActionListener() {
+        JLabel lblJogador1 = new JLabel("Jogador 1:");
+        JComboBox<String> comboJogador1 = new JComboBox<>(getNomesJogadores());
+
+        JLabel lblJogador2 = new JLabel("Jogador 2:");
+        JComboBox<String> comboJogador2 = new JComboBox<>(getNomesJogadores());
+
+        JLabel lblArbitro = new JLabel("Árbitro:");
+        JComboBox<String> comboArbitro = new JComboBox<>(getNomesArbitros());
+
+        JButton btnGerar = new JButton("Gerar Torneio");
+
+        btnGerar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar lógica para gerar torneio singulares
-                frameTorneio.dispose();
+                String generoSelecionado = (String) comboGenero.getSelectedItem();
+                String nomeJogador1 = (String) comboJogador1.getSelectedItem();
+                String nomeJogador2 = (String) comboJogador2.getSelectedItem();
+                String nomeArbitro = (String) comboArbitro.getSelectedItem();
+
+                Jogador jogador1 = campeonato.getJogadorPorNome(nomeJogador1);
+                Jogador jogador2 = campeonato.getJogadorPorNome(nomeJogador2);
+                Arbitro arbitro = campeonato.getArbitroPorNome(nomeArbitro);
+
+                if (jogador1 != null && jogador2 != null && arbitro != null) {
+                    PartidaSingulares partida = new PartidaSingulares(jogador1, jogador2, arbitro);
+                    Jogador vencedor = partida.determinarVencedor();
+                    double duracao = partida.tempoPartida();
+
+                    mostrarDetalhesTorneio(generoSelecionado, jogador1, jogador2, vencedor, duracao, arbitro);
+                } else {
+                    JOptionPane.showMessageDialog(frameTorneio, "Jogadores ou árbitro não encontrados.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
-        btnTorneioDuplas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Implementar lógica para gerar torneio duplas
-                frameTorneio.dispose();
-            }
-        });
-
-        panelTorneio.add(new JLabel("Escolha o tipo de torneio:"));
-        panelTorneio.add(btnTorneioSingulares);
-        panelTorneio.add(btnTorneioDuplas);
+        panelTorneio.add(lblEscolhaGenero);
+        panelTorneio.add(comboGenero);
+        panelTorneio.add(lblJogador1);
+        panelTorneio.add(comboJogador1);
+        panelTorneio.add(lblJogador2);
+        panelTorneio.add(comboJogador2);
+        panelTorneio.add(lblArbitro);
+        panelTorneio.add(comboArbitro);
+        panelTorneio.add(new JLabel()); // Espaço vazio
+        panelTorneio.add(btnGerar);
 
         frameTorneio.add(panelTorneio, BorderLayout.CENTER);
         frameTorneio.setVisible(true);
+    }
+
+    private void mostrarDetalhesTorneio(String genero, Jogador jogador1, Jogador jogador2, Jogador vencedor, double duracao, Arbitro arbitro) {
+        JFrame frameDetalhes = new JFrame("Detalhes do Torneio");
+        frameDetalhes.setSize(500, 400);
+        frameDetalhes.setLayout(new BorderLayout());
+
+        JPanel panelDetalhes = new JPanel();
+        panelDetalhes.setLayout(new GridLayout(6, 2, 10, 10));
+        panelDetalhes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        panelDetalhes.add(new JLabel("Género:"));
+        panelDetalhes.add(new JLabel(genero));
+        panelDetalhes.add(new JLabel("Jogador 1:"));
+        panelDetalhes.add(new JLabel(jogador1.getNome()));
+        panelDetalhes.add(new JLabel("Jogador 2:"));
+        panelDetalhes.add(new JLabel(jogador2.getNome()));
+        panelDetalhes.add(new JLabel("Vencedor:"));
+        panelDetalhes.add(new JLabel(vencedor.getNome()));
+        panelDetalhes.add(new JLabel("Duração:"));
+        panelDetalhes.add(new JLabel(duracao + " minutos"));
+        panelDetalhes.add(new JLabel("Árbitro:"));
+        panelDetalhes.add(new JLabel(arbitro.getNome()));
+
+        frameDetalhes.add(panelDetalhes, BorderLayout.CENTER);
+        frameDetalhes.setVisible(true);
     }
 
     private void visualizarCampeonato() {
@@ -302,7 +355,21 @@ public class GUI {
         frameCampeonato.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new GUI();
+    private String[] getNomesJogadores() {
+        List<Jogador> jogadores = campeonato.getJogadores();
+        String[] nomes = new String[jogadores.size()];
+        for (int i = 0; i < jogadores.size(); i++) {
+            nomes[i] = jogadores.get(i).getNome();
+        }
+        return nomes;
+    }
+
+    private String[] getNomesArbitros() {
+        List<Arbitro> arbitros = campeonato.getArbitros();
+        String[] nomes = new String[arbitros.size()];
+        for (int i = 0; i < arbitros.size(); i++) {
+            nomes[i] = arbitros.get(i).getNome();
+        }
+        return nomes;
     }
 }
