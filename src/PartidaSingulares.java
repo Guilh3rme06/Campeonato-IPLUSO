@@ -31,49 +31,49 @@ public class PartidaSingulares implements ControloPartida{
     @Override
     public Jogador determinarVencedor(){
         Scanner jogadores = new Scanner(System.in);
-        System.out.println("Defina o genero da partida:");
+        System.out.println("Defina o género da partida:");
         String genero = jogadores.nextLine();
         if (genero.equals("M") || genero.equals("m")) {
-            System.out.println("Jogo masculino");
-            System.out.println("Insira o jogador1:");
+            System.out.println("Jogo Masculino");
+            System.out.println("Insira o Jogador 1:");
             String nome1 = jogadores.nextLine();
             jogador1.setNome(nome1);
             if(jogador1.getGenero() == 'F' || jogador1.getGenero() == 'f'){
-                System.out.println("Jogador nao permitido"); 
+                System.out.println("Jogador não permitido!"); 
                 nome1 = null;
-                System.out.println("Insira o jogador1:");
+                System.out.println("Insira o Jogador 1:");
                 nome1 = jogadores.nextLine();
                 jogador1.setNome(nome1);
             }
-            System.out.println("Insira o jogador2:");
+            System.out.println("Insira o Jogador 2:");
             String nome2 = jogadores.nextLine();
             jogador2.setNome(nome2);
             if(jogador2.getGenero() == 'F' || jogador2.getGenero() == 'f'){
-                System.out.println("Jogador nao permitido"); 
+                System.out.println("Jogador não permitido!"); 
                 nome2 = null;
-                System.out.println("Insira o jogador1:");
+                System.out.println("Insira o jogador 2:");
                 nome2 = jogadores.nextLine();
                 jogador1.setNome(nome2);
             }
         }else{
             System.out.println("Jogo Feminino");
-            System.out.println("Insira o jogador1:");
+            System.out.println("Insira o Jogador 1:");
             String nome1 = jogadores.nextLine();
             jogador1.setNome(nome1);
             if(jogador2.getGenero() == 'M' || jogador2.getGenero() == 'm'){
-                System.out.println("Jogador nao permitido"); 
+                System.out.println("Jogador nÃo permitido!"); 
                 nome1 = null;
-                System.out.println("Insira o jogador1:");
+                System.out.println("Insira o Jogador 1:");
                 nome1 = jogadores.nextLine();
                 jogador1.setNome(nome1);
             }
-            System.out.println("Insira o jogador2:");
+            System.out.println("Insira o Jogador 2:");
             String nome2 = jogadores.nextLine();
             jogador2.setNome(nome2);
             if(jogador2.getGenero() == 'M' || jogador2.getGenero() == 'm'){
-                System.out.println("Jogador nao permitido"); 
+                System.out.println("Jogador não permitido!"); 
                 nome2 = null;
-                System.out.println("Insira o jogador1:");
+                System.out.println("Insira o Jogador 2:");
                 nome2 = jogadores.nextLine();
                 jogador1.setNome(nome2);
             }
