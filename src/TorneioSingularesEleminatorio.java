@@ -25,7 +25,7 @@ public class TorneioSingularesEleminatorio extends TorneioSingulares {
                 if (i + 1 < vencedores.size()) {
                     Jogador jogador1 = vencedores.get(i);
                     Jogador jogador2 = vencedores.get(i + 1);
-                    PartidaSingulares novaPartida = new PartidaSingulares(jogador1, jogador2, new Arbitro("Árbitro", 40, 'M', 5, "Certificação A"));
+                    PartidaSingulares novaPartida = new PartidaSingulares(jogador1, jogador2, new Arbitro("Árbitro", 40, 'M', "Certificação A"));
                     proximosVencedores.add(novaPartida.determinarVencedor());
                 } else {
                     proximosVencedores.add(vencedores.get(i));
