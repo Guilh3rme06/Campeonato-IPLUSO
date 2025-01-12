@@ -1,10 +1,8 @@
-package src;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TorneioSingluaresPontos extends TorneioSingulares {
-    public TorneioSingluaresPontos() {
+public class TorneioSingularesPontos extends TorneioSingulares {
+    public TorneioSingularesPontos() {
         super();
     }
 
