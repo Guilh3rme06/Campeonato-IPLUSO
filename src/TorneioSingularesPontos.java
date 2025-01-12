@@ -1,10 +1,8 @@
-package src;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class TorneioSingluaresPontos extends TorneioSingulares {
-    public TorneioSingluaresPontos() {
+
+public class TorneioSingularesPontos extends TorneioSingulares {
+    public TorneioSingularesPontos() {
         super();
     }
 
@@ -15,8 +13,8 @@ public class TorneioSingluaresPontos extends TorneioSingulares {
         }
 
         // Lista para armazenar os jogadores e seus pontos
-        List<Jogador> jogadores = new ArrayList<>();
-        List<Integer> pontos = new ArrayList<>();
+        ArrayList<Jogador> jogadores = new ArrayList<>();
+        ArrayList<Integer> pontos = new ArrayList<>();
 
         // Calcular os pontos dos jogadores
         for (PartidaSingulares partida : partidas) {

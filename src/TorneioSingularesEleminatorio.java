@@ -1,7 +1,4 @@
-package src;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class TorneioSingularesEleminatorio extends TorneioSingulares {
     public TorneioSingularesEleminatorio() {
@@ -14,13 +11,13 @@ public class TorneioSingularesEleminatorio extends TorneioSingulares {
             return null;
         }
 
-        List<Jogador> vencedores = new ArrayList<>();
+        ArrayList<Jogador> vencedores = new ArrayList<>();
         for (PartidaSingulares partida : partidas) {
             vencedores.add(partida.determinarVencedor());
         }
 
         while (vencedores.size() > 1) {
-            List<Jogador> proximosVencedores = new ArrayList<>();
+            ArrayList<Jogador> proximosVencedores = new ArrayList<>();
             for (int i = 0; i < vencedores.size(); i += 2) {
                 if (i + 1 < vencedores.size()) {
                     Jogador jogador1 = vencedores.get(i);
