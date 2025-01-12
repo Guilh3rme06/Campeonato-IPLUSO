@@ -186,11 +186,11 @@ public class GUI {
 
     private void registarArbitro() {
         JFrame frameArbitro = new JFrame("Registar Árbitro");
-        frameArbitro.setSize(400, 200);
+        frameArbitro.setSize(400, 300);
         frameArbitro.setLayout(new BorderLayout());
 
         JPanel panelArbitro = new JPanel();
-        panelArbitro.setLayout(new GridLayout(4, 2, 10, 10));
+        panelArbitro.setLayout(new GridLayout(6, 2, 10, 10));
         panelArbitro.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JTextField txtNome = new JTextField();
