@@ -216,13 +216,13 @@ public class GUI {
                 char genero = txtGenero.getText().charAt(0);
                 String certificacoes = txtCertificacoes.getText();
 
-                Arbitro arbitro = new Arbitro(nome, idade, genero, 0, certificacoes);
+                Arbitro arbitro = new Arbitro(nome, idade, genero, certificacoes);
                 campeonato.adicionarArbitro(arbitro);
                 frameArbitro.dispose();
             }
         });
 
-        panelArbitro.add(new JLabel()); // Adiciona um espaço vazio para alinhar o botão
+        panelArbitro.add(new JLabel());
         panelArbitro.add(btnSalvar);
 
         frameArbitro.add(panelArbitro, BorderLayout.CENTER);
