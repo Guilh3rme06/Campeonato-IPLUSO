@@ -1,5 +1,3 @@
-package src;
-
 import java.util.Random;
 import java.util.Scanner;
 public class PartidaSingulares implements ControloPartida{
@@ -62,7 +60,7 @@ public class PartidaSingulares implements ControloPartida{
             System.out.println("Insira o Jogador 1:");
             String nome1 = jogadores.nextLine();
             jogador1.setNome(nome1);
-            if(jogador2.getGenero() == 'M' || jogador2.getGenero() == 'm'){
+            if(jogador1.getGenero() == 'M' || jogador1.getGenero() == 'm'){
                 System.out.println("Jogador nÃo permitido!"); 
                 nome1 = null;
                 System.out.println("Insira o Jogador 1:");
