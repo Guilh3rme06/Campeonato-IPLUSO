@@ -11,8 +11,6 @@ public abstract class TorneioSingulares {
 
     public void adicionarPartida(PartidaSingulares partida) {
         partidas.add(partida);
-
-        
     }
 
     public abstract Jogador determinarVencedorTorneioSingulares();
