@@ -88,7 +88,7 @@ public class GUI {
         frameJogador.setLayout(new BorderLayout());
 
         JPanel panelJogador = new JPanel();
-        panelJogador.setLayout(new GridLayout(6, 2, 10, 10));
+        panelJogador.setLayout(new GridLayout(6, 2, 10, 10)); // Alterado para 8 linhas
         panelJogador.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JTextField txtNome = new JTextField();
@@ -177,7 +177,7 @@ public class GUI {
             }
         });
 
-        panelJogador.add(new JLabel()); // Adiciona um espaço vazio para alinhar o botão
+        panelJogador.add(new JLabel());
         panelJogador.add(btnSalvar);
 
         frameJogador.add(panelJogador, BorderLayout.CENTER);
@@ -197,6 +197,71 @@ public class GUI {
         JTextField txtIdade = new JTextField();
         JTextField txtGenero = new JTextField();
         JTextField txtCertificacoes = new JTextField();
+
+        // Configurar filtros de entrada
+        ((AbstractDocument) txtNome.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string.matches("[a-zA-Z]+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[a-zA-Z]+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
+        ((AbstractDocument) txtIdade.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string.matches("\\d+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("\\d+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
+        ((AbstractDocument) txtGenero.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string.matches("[MFmf]")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[MFmf]")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
+        ((AbstractDocument) txtCertificacoes.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (string.matches("[a-zA-Z]+")) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (text.matches("[a-zA-Z]+")) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
 
         panelArbitro.add(new JLabel("Nome:"));
         panelArbitro.add(txtNome);
@@ -284,7 +349,7 @@ public class GUI {
         panelTorneio.add(comboJogador2);
         panelTorneio.add(lblArbitro);
         panelTorneio.add(comboArbitro);
-        panelTorneio.add(new JLabel()); // Espaço vazio
+        panelTorneio.add(new JLabel());
         panelTorneio.add(btnGerar);
 
         frameTorneio.add(panelTorneio, BorderLayout.CENTER);

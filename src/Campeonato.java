@@ -22,5 +22,4 @@ public class Campeonato {
         }
     }
 
-    // Métodos adicionais para adicionar jogadores, árbitros, etc.
 }
