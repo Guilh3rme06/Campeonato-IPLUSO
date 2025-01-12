@@ -1,10 +1,10 @@
-package src;
-
+import java.util.ArrayList;
 /**
  * Classe que representa um árbitro no campeonato.
  */
 public class Arbitro extends Pessoa {
     private String certificacoes;
+    private static ArrayList<Arbitro> arbitros = new ArrayList<>();
 
     /**
      * Construtor da classe Arbitro.
@@ -32,5 +32,9 @@ public class Arbitro extends Pessoa {
      */
     public void setCertificacoes(String certificacoes) {
         this.certificacoes = certificacoes;
+    }
+
+    public static void adicionarArbitro(Arbitro arbitro){
+        arbitros.add(arbitro);
     }
 }

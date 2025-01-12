@@ -1,4 +1,4 @@
-package src;
+import java.util.ArrayList;
 
 /**
  * Classe que representa um jogador no campeonato.
@@ -6,6 +6,8 @@ package src;
 public class Jogador extends Pessoa {
     private int rankings;
     private int partidasJogadas;
+    private static ArrayList<Jogador> jogadores = new ArrayList<>();
+
 
     /**
      * Construtor da classe Jogador.
@@ -51,5 +53,9 @@ public class Jogador extends Pessoa {
      */
     public void setPartidasJogadas(int partidasJogadas) {
         this.partidasJogadas = partidasJogadas;
+    }
+
+    public static void adicionarJogador(Jogador jogador){
+        jogadores.add(jogador);
     }
 }

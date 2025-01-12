@@ -1,11 +1,9 @@
-package src;
-
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Classe que representa a interface gráfica do sistema.
@@ -172,7 +170,7 @@ public class GUI {
                 int partidasJogadas = Integer.parseInt(txtPartidasJogadas.getText());
 
                 Jogador jogador = new Jogador(nome, idade, genero, rankings, partidasJogadas);
-                campeonato.adicionarJogador(jogador);
+                Jogador.adicionarJogador(jogador);
                 frameJogador.dispose();
             }
         });
@@ -282,7 +280,7 @@ public class GUI {
                 String certificacoes = txtCertificacoes.getText();
 
                 Arbitro arbitro = new Arbitro(nome, idade, genero, certificacoes);
-                campeonato.adicionarArbitro(arbitro);
+                Arbitro.adicionarArbitro(arbitro);
                 frameArbitro.dispose();
             }
         });
@@ -421,7 +419,7 @@ public class GUI {
     }
 
     private String[] getNomesJogadores() {
-        List<Jogador> jogadores = campeonato.getJogadores();
+        ArrayList<Jogador> jogadores = campeonato.getJogadores();
         String[] nomes = new String[jogadores.size()];
         for (int i = 0; i < jogadores.size(); i++) {
             nomes[i] = jogadores.get(i).getNome();
@@ -430,7 +428,7 @@ public class GUI {
     }
 
     private String[] getNomesArbitros() {
-        List<Arbitro> arbitros = campeonato.getArbitros();
+        ArrayList<Arbitro> arbitros = campeonato.getArbitros();
         String[] nomes = new String[arbitros.size()];
         for (int i = 0; i < arbitros.size(); i++) {
             nomes[i] = arbitros.get(i).getNome();
