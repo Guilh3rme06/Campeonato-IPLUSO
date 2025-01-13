@@ -323,7 +323,8 @@ public class GUI {
                 String nomeJogador2 = (String) comboJogador2.getSelectedItem();
                 String nomeArbitro = (String) comboArbitro.getSelectedItem();
 
-                Jogador jogador1 = campeonato.getJogadorPorNome(nomeJogador1);
+                
+                String jogador1 = Pessoa.getNome();
                 Jogador jogador2 = campeonato.getJogadorPorNome(nomeJogador2);
                 Arbitro arbitro = campeonato.getArbitroPorNome(nomeArbitro);
 
@@ -419,7 +420,7 @@ public class GUI {
     }
 
     private String[] getNomesJogadores() {
-        ArrayList<Jogador> jogadores = campeonato.getJogadores();
+        ArrayList<Jogador> jogadores = jogadores.jogadores();
         String[] nomes = new String[jogadores.size()];
         for (int i = 0; i < jogadores.size(); i++) {
             nomes[i] = jogadores.get(i).getNome();

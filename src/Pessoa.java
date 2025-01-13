@@ -1,12 +1,10 @@
-package src;
-
 /**
  * Classe abstrata que representa uma pessoa no campeonato.
  */
 public abstract class Pessoa {
-    protected String nome;
-    protected int idade;
-    protected char genero;
+    private String nome;
+    private int idade;
+    private char genero;
 
     /**
      * Construtor da classe Pessoa.
