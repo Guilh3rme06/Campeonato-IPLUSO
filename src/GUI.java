@@ -277,31 +277,35 @@ public class GUI {
         // Implementar lógica para gerar torneio
     }
 
-private void visualizarCampeonato() {
+    private void visualizarCampeonato() {
         JFrame frameCampeonato = new JFrame("Visualizar Campeonato");
         frameCampeonato.setSize(600, 400);
-        frameCampeonato.setLayout(new BorderLayout(10, 10));
-
+        frameCampeonato.setLayout(new BorderLayout());
+    
         JPanel panelCampeonato = new JPanel();
         panelCampeonato.setLayout(new BorderLayout(10, 10));
         panelCampeonato.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+    
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-
+    
         // Adicionar informações sobre o campeonato
         StringBuilder info = new StringBuilder();
         info.append("Estado dos Torneios:\n");
         // Adicionar lógica para exibir o estado dos torneios
-
+    
         info.append("\nRankings dos Jogadores:\n");
         // Adicionar lógica para exibir os rankings dos jogadores
-
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
+        for (Jogador jogador : jogadores) {
+            info.append(jogador.toString()).append("\n");
+        }
+    
         textArea.setText(info.toString());
-
+    
         panelCampeonato.add(scrollPane, BorderLayout.CENTER);
-
+    
         JButton btnAtribuirPremio = new JButton("Atribuir Prémio");
         btnAtribuirPremio.addActionListener(new ActionListener() {
             @Override
@@ -309,8 +313,9 @@ private void visualizarCampeonato() {
                 // Implementar lógica para atribuir prémio
             }
         });
-
+    
         panelCampeonato.add(btnAtribuirPremio, BorderLayout.SOUTH);
+    
         frameCampeonato.add(panelCampeonato, BorderLayout.CENTER);
         frameCampeonato.setVisible(true);
     }

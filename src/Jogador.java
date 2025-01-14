@@ -59,6 +59,10 @@ public class Jogador extends Pessoa {
         jogadores.add(jogador);
     }
 
+    public static ArrayList<Jogador> getJogadores(){
+        return jogadores;
+    }
+
     public static void exibirJogador(){
         for (Jogador jogador : jogadores) {
             System.out.println(jogador);
@@ -67,12 +71,11 @@ public class Jogador extends Pessoa {
 
     @Override
     public String toString() {
-        return "Jogador{" +
-                "nome='" + getNome() +
-                ", idade=" + getIdade() +
-                ", genero=" + getGenero() +
-                ", rankings=" + rankings +
-                ", partidasJogadas=" + partidasJogadas +
-                '}';
+        return "Jogador: " +
+                "Nome= " + getNome() +
+                ", Idade= " + getIdade() +
+                ", Género= " + getGenero() +
+                ", Rankings= " + rankings +
+                ", Partidas Jogadas= " + partidasJogadas;
     }
 }

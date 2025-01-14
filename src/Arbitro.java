@@ -39,11 +39,10 @@ public class Arbitro extends Pessoa {
     }
 
     public String toString(){
-        return"Arbitro{" +
-                "nome='" + getNome() +
-                ", idade=" + getIdade() +
-                ", genero=" + getGenero() +
-                ", certificacoes='" + certificacoes +
-                '}';
+        return"Arbitro: " +
+                "Nome= " + getNome() +
+                ", Idade= " + getIdade() +
+                ", Género= " + getGenero() +
+                ", Certificações= " + certificacoes;
     }
 }
