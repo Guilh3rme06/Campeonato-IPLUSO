@@ -275,7 +275,7 @@ public class GUI {
 
     private void gerarTorneio() {
         JFrame frameTorneio = new JFrame("Gerar Torneio");
-        frameTorneio.setSize(600, 400);
+        frameTorneio.setSize(700, 600);
         frameTorneio.setLayout(new BorderLayout());
     
         JPanel panelTorneio = new JPanel();
@@ -429,13 +429,27 @@ public class GUI {
         // Adicionar informações sobre o campeonato
         StringBuilder info = new StringBuilder();
         info.append("Estado dos Torneios:\n");
-        // Adicionar lógica para exibir o estado dos torneios
     
-        info.append("\nRankings dos Jogadores:\n");
-        // Adicionar lógica para exibir os rankings dos jogadores
+        // Exibir informações do torneio de singulares
+        TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
+        torneioSingulares.iniciarTorneio(jogadores);
+    
+        info.append("Torneio de Singulares:\n");
+        for (PartidaSingulares partida : torneioSingulares.partidas) {
+            info.append("Partida: ").append(partida.getJogador1().getNome()).append(" vs ").append(partida.getJogador2().getNome()).append("\n");
+        }
+    
+        // Determinar o vencedor do torneio de singulares
+        Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
+        if (vencedorSingulares != null) {
+            info.append("Vencedor do Torneio de Singulares: ").append(vencedorSingulares.getNome()).append("\n");
+        }
+    
+        // Exibir rankings dos jogadores
+        info.append("\nRankings dos Jogadores:\n");
         for (Jogador jogador : jogadores) {
-            info.append(jogador.toString()).append("\n");
+            info.append(jogador.getNome()).append(" - Ranking: ").append(jogador.getRankings()).append(" - Partidas Jogadas: ").append(jogador.getPartidasJogadas()).append("\n");
         }
     
         textArea.setText(info.toString());
@@ -454,7 +468,7 @@ public class GUI {
     
         frameCampeonato.add(panelCampeonato, BorderLayout.CENTER);
         frameCampeonato.setVisible(true);
-    } 
+    }
 
     private String[] getNomesJogadores() {
         ArrayList<Jogador> jogadores = Jogador.getJogadores();

@@ -9,6 +9,14 @@ public class Campeonato {
         this.torneioSingulares = new TorneioSingularesEleminatorio(); // Exemplo de implementação concreta
     }
 
+    public void adicionarTorneioSingulares(TorneioSingulares torneio) {
+        this.torneioSingulares = torneio;
+    }
+
+    public void adicionarTorneioDuplas(TorneioDuplas torneio) {
+        this.torneioDuplas = torneio;
+    }
+
     public void medalharVencedorTorneios() {
         Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
         Jogador[] vencedoresDuplas = torneioDuplas.getVencedores();
