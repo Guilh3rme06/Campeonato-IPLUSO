@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 /**
  * Classe que representa um árbitro no campeonato.
  */
@@ -38,11 +39,17 @@ public class Arbitro extends Pessoa {
         arbitros.add(arbitro);
     }
 
-    public String toString(){
-        return"Arbitro: " +
-                "Nome= " + getNome() +
-                ", Idade= " + getIdade() +
-                ", Género= " + getGenero() +
-                ", Certificações= " + certificacoes;
+    public static ArrayList<Arbitro> getArbitros() {
+        return arbitros;
+    }
+
+    @Override
+    public String toString() {
+        return "Arbitro{" +
+                "nome='" + getNome() +
+                ", idade=" + getIdade() +
+                ", genero=" + getGenero() +
+                ", certificacoes='" + certificacoes + '\'' +
+                '}';
     }
 }

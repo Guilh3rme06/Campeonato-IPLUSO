@@ -318,7 +318,7 @@ public class GUI {
     
         frameCampeonato.add(panelCampeonato, BorderLayout.CENTER);
         frameCampeonato.setVisible(true);
-    }
+    } 
 
     private String[] getNomesJogadores() {
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
