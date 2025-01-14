@@ -37,4 +37,13 @@ public class Arbitro extends Pessoa {
     public static void adicionarArbitro(Arbitro arbitro){
         arbitros.add(arbitro);
     }
+
+    public String toString(){
+        return"Arbitro{" +
+                "nome='" + getNome() +
+                ", idade=" + getIdade() +
+                ", genero=" + getGenero() +
+                ", certificacoes='" + certificacoes +
+                '}';
+    }
 }

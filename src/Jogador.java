@@ -58,4 +58,21 @@ public class Jogador extends Pessoa {
     public static void adicionarJogador(Jogador jogador){
         jogadores.add(jogador);
     }
+
+    public static void exibirJogador(){
+        for (Jogador jogador : jogadores) {
+            System.out.println(jogador);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Jogador{" +
+                "nome='" + getNome() +
+                ", idade=" + getIdade() +
+                ", genero=" + getGenero() +
+                ", rankings=" + rankings +
+                ", partidasJogadas=" + partidasJogadas +
+                '}';
+    }
 }

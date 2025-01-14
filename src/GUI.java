@@ -84,70 +84,61 @@ public class GUI {
         JFrame frameJogador = new JFrame("Registar Jogador");
         frameJogador.setSize(400, 300);
         frameJogador.setLayout(new BorderLayout());
-
+    
         JPanel panelJogador = new JPanel();
         panelJogador.setLayout(new GridLayout(6, 2, 10, 10)); // Alterado para 8 linhas
         panelJogador.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+    
         JTextField txtNome = new JTextField();
         JTextField txtIdade = new JTextField();
         JTextField txtGenero = new JTextField();
         JTextField txtRankings = new JTextField("0");
         JTextField txtPartidasJogadas = new JTextField("0");
-
+    
         // Configurar filtros de entrada
         ((AbstractDocument) txtNome.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("[a-zA-Z]+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
+                fb.insertString(offset, string.replaceAll("[^a-zA-Z ]", ""), attr);
             }
-
+    
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[a-zA-Z]+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
+                fb.replace(offset, length, text.replaceAll("[^a-zA-Z ]", ""), attrs);
             }
         });
-
+    
         ((AbstractDocument) txtIdade.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
+                fb.insertString(offset, string.replaceAll("[^0-9]", ""), attr);
             }
-
+    
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
+                fb.replace(offset, length, text.replaceAll("[^0-9]", ""), attrs);
             }
         });
-
+    
         ((AbstractDocument) txtGenero.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("[MFmf]")) {
+                if (string.matches("[MFmf]") && fb.getDocument().getLength() + string.length() <= 1) {
                     super.insertString(fb, offset, string, attr);
                 }
             }
 
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[MFmf]")) {
+                if (text.matches("[MFmf]") && fb.getDocument().getLength() - length + text.length() <= 1) {
                     super.replace(fb, offset, length, text, attrs);
                 }
             }
-        });
-
+        });    
         // Configurar campos de rankings e partidas jogadas como não editáveis
         txtRankings.setEditable(false);
         txtPartidasJogadas.setEditable(false);
-
+    
         panelJogador.add(new JLabel("Nome:"));
         panelJogador.add(txtNome);
         panelJogador.add(new JLabel("Idade:"));
@@ -158,7 +149,7 @@ public class GUI {
         panelJogador.add(txtRankings);
         panelJogador.add(new JLabel("Partidas Jogadas:"));
         panelJogador.add(txtPartidasJogadas);
-
+    
         JButton btnSalvar = new JButton("Salvar");
         btnSalvar.addActionListener(new ActionListener() {
             @Override
@@ -168,16 +159,17 @@ public class GUI {
                 char genero = txtGenero.getText().charAt(0);
                 int rankings = Integer.parseInt(txtRankings.getText());
                 int partidasJogadas = Integer.parseInt(txtPartidasJogadas.getText());
-
+    
                 Jogador jogador = new Jogador(nome, idade, genero, rankings, partidasJogadas);
                 Jogador.adicionarJogador(jogador);
+                System.out.println(jogador.toString());
                 frameJogador.dispose();
             }
         });
-
+    
         panelJogador.add(new JLabel());
         panelJogador.add(btnSalvar);
-
+    
         frameJogador.add(panelJogador, BorderLayout.CENTER);
         frameJogador.setVisible(true);
     }
@@ -186,81 +178,69 @@ public class GUI {
         JFrame frameArbitro = new JFrame("Registar Árbitro");
         frameArbitro.setSize(400, 300);
         frameArbitro.setLayout(new BorderLayout());
-
+    
         JPanel panelArbitro = new JPanel();
         panelArbitro.setLayout(new GridLayout(6, 2, 10, 10));
         panelArbitro.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+    
         JTextField txtNome = new JTextField();
         JTextField txtIdade = new JTextField();
         JTextField txtGenero = new JTextField();
         JTextField txtCertificacoes = new JTextField();
-
+    
         // Configurar filtros de entrada
         ((AbstractDocument) txtNome.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("[a-zA-Z]+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
+                fb.insertString(offset, string.replaceAll("[^a-zA-Z ]", ""), attr);
             }
-
+    
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[a-zA-Z]+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
+                fb.replace(offset, length, text.replaceAll("[^a-zA-Z ]", ""), attrs);
             }
         });
-
+    
         ((AbstractDocument) txtIdade.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("\\d+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
+                fb.insertString(offset, string.replaceAll("[^0-9]", ""), attr);
             }
-
+    
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("\\d+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
+                fb.replace(offset, length, text.replaceAll("[^0-9]", ""), attrs);
             }
         });
-
+    
         ((AbstractDocument) txtGenero.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("[MFmf]")) {
+                if (string.matches("[MFmf]") && fb.getDocument().getLength() + string.length() <= 1) {
                     super.insertString(fb, offset, string, attr);
                 }
             }
 
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[MFmf]")) {
+                if (text.matches("[MFmf]") && fb.getDocument().getLength() - length + text.length() <= 1) {
                     super.replace(fb, offset, length, text, attrs);
                 }
             }
         });
-
+    
         ((AbstractDocument) txtCertificacoes.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
             public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                if (string.matches("[a-zA-Z]+")) {
-                    super.insertString(fb, offset, string, attr);
-                }
+                fb.insertString(offset, string.replaceAll("[^a-zA-Z ]", ""), attr);
             }
-
+    
             @Override
             public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                if (text.matches("[a-zA-Z]+")) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
+                fb.replace(offset, length, text.replaceAll("[^a-zA-Z ]", ""), attrs);
             }
         });
-
+    
         panelArbitro.add(new JLabel("Nome:"));
         panelArbitro.add(txtNome);
         panelArbitro.add(new JLabel("Idade:"));
@@ -269,7 +249,7 @@ public class GUI {
         panelArbitro.add(txtGenero);
         panelArbitro.add(new JLabel("Certificações:"));
         panelArbitro.add(txtCertificacoes);
-
+    
         JButton btnSalvar = new JButton("Salvar");
         btnSalvar.addActionListener(new ActionListener() {
             @Override
@@ -278,110 +258,26 @@ public class GUI {
                 int idade = Integer.parseInt(txtIdade.getText());
                 char genero = txtGenero.getText().charAt(0);
                 String certificacoes = txtCertificacoes.getText();
-
+    
                 Arbitro arbitro = new Arbitro(nome, idade, genero, certificacoes);
                 Arbitro.adicionarArbitro(arbitro);
+                System.out.println(arbitro.toString());
                 frameArbitro.dispose();
             }
         });
-
+    
         panelArbitro.add(new JLabel());
         panelArbitro.add(btnSalvar);
-
+    
         frameArbitro.add(panelArbitro, BorderLayout.CENTER);
         frameArbitro.setVisible(true);
     }
 
     private void gerarTorneio() {
-        JFrame frameTorneio = new JFrame("Gerar/Controlar Torneio");
-        frameTorneio.setSize(400, 300);
-        frameTorneio.setLayout(new BorderLayout());
-
-        JPanel panelTorneio = new JPanel();
-        panelTorneio.setLayout(new GridLayout(5, 2, 10, 10));
-        panelTorneio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        JLabel lblEscolhaGenero = new JLabel("Escolha o género:");
-        JComboBox<String> comboGenero = new JComboBox<>(new String[]{"Masculino", "Feminino"});
-
-        JLabel lblJogador1 = new JLabel("Jogador 1:");
-        JComboBox<String> comboJogador1 = new JComboBox<>(getNomesJogadores());
-
-        JLabel lblJogador2 = new JLabel("Jogador 2:");
-        JComboBox<String> comboJogador2 = new JComboBox<>(getNomesJogadores());
-
-        JLabel lblArbitro = new JLabel("Árbitro:");
-        JComboBox<String> comboArbitro = new JComboBox<>(getNomesArbitros());
-
-        JButton btnGerar = new JButton("Gerar Torneio");
-
-        btnGerar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String generoSelecionado = (String) comboGenero.getSelectedItem();
-                String nomeJogador1 = (String) comboJogador1.getSelectedItem();
-                String nomeJogador2 = (String) comboJogador2.getSelectedItem();
-                String nomeArbitro = (String) comboArbitro.getSelectedItem();
-
-                
-                String jogador1 = Pessoa.getNome();
-                Jogador jogador2 = campeonato.getJogadorPorNome(nomeJogador2);
-                Arbitro arbitro = campeonato.getArbitroPorNome(nomeArbitro);
-
-                if (jogador1 != null && jogador2 != null && arbitro != null) {
-                    PartidaSingulares partida = new PartidaSingulares(jogador1, jogador2, arbitro);
-                    Jogador vencedor = partida.determinarVencedor();
-                    double duracao = partida.tempoPartida();
-
-                    mostrarDetalhesTorneio(generoSelecionado, jogador1, jogador2, vencedor, duracao, arbitro);
-                } else {
-                    JOptionPane.showMessageDialog(frameTorneio, "Jogadores ou árbitro não encontrados.", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        panelTorneio.add(lblEscolhaGenero);
-        panelTorneio.add(comboGenero);
-        panelTorneio.add(lblJogador1);
-        panelTorneio.add(comboJogador1);
-        panelTorneio.add(lblJogador2);
-        panelTorneio.add(comboJogador2);
-        panelTorneio.add(lblArbitro);
-        panelTorneio.add(comboArbitro);
-        panelTorneio.add(new JLabel());
-        panelTorneio.add(btnGerar);
-
-        frameTorneio.add(panelTorneio, BorderLayout.CENTER);
-        frameTorneio.setVisible(true);
+        // Implementar lógica para gerar torneio
     }
 
-    private void mostrarDetalhesTorneio(String genero, Jogador jogador1, Jogador jogador2, Jogador vencedor, double duracao, Arbitro arbitro) {
-        JFrame frameDetalhes = new JFrame("Detalhes do Torneio");
-        frameDetalhes.setSize(500, 400);
-        frameDetalhes.setLayout(new BorderLayout());
-
-        JPanel panelDetalhes = new JPanel();
-        panelDetalhes.setLayout(new GridLayout(6, 2, 10, 10));
-        panelDetalhes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        panelDetalhes.add(new JLabel("Género:"));
-        panelDetalhes.add(new JLabel(genero));
-        panelDetalhes.add(new JLabel("Jogador 1:"));
-        panelDetalhes.add(new JLabel(jogador1.getNome()));
-        panelDetalhes.add(new JLabel("Jogador 2:"));
-        panelDetalhes.add(new JLabel(jogador2.getNome()));
-        panelDetalhes.add(new JLabel("Vencedor:"));
-        panelDetalhes.add(new JLabel(vencedor.getNome()));
-        panelDetalhes.add(new JLabel("Duração:"));
-        panelDetalhes.add(new JLabel(duracao + " minutos"));
-        panelDetalhes.add(new JLabel("Árbitro:"));
-        panelDetalhes.add(new JLabel(arbitro.getNome()));
-
-        frameDetalhes.add(panelDetalhes, BorderLayout.CENTER);
-        frameDetalhes.setVisible(true);
-    }
-
-    private void visualizarCampeonato() {
+private void visualizarCampeonato() {
         JFrame frameCampeonato = new JFrame("Visualizar Campeonato");
         frameCampeonato.setSize(600, 400);
         frameCampeonato.setLayout(new BorderLayout(10, 10));
@@ -420,7 +316,7 @@ public class GUI {
     }
 
     private String[] getNomesJogadores() {
-        ArrayList<Jogador> jogadores = jogadores.jogadores();
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
         String[] nomes = new String[jogadores.size()];
         for (int i = 0; i < jogadores.size(); i++) {
             nomes[i] = jogadores.get(i).getNome();
@@ -429,7 +325,7 @@ public class GUI {
     }
 
     private String[] getNomesArbitros() {
-        ArrayList<Arbitro> arbitros = campeonato.getArbitros();
+        ArrayList<Arbitro> arbitros = Arbitro.getArbitros();
         String[] nomes = new String[arbitros.size()];
         for (int i = 0; i < arbitros.size(); i++) {
             nomes[i] = arbitros.get(i).getNome();
