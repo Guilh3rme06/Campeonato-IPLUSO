@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 
 /**
@@ -72,10 +74,10 @@ public class Jogador extends Pessoa {
     @Override
     public String toString() {
         return "Jogador: " +
-                "Nome= " + getNome() +
-                ", Idade= " + getIdade() +
-                ", Género= " + getGenero() +
-                ", Rankings= " + rankings +
-                ", Partidas Jogadas= " + partidasJogadas;
+                "Nome = " + getNome() +
+                ", Idade = " + getIdade() +
+                ", Género = " + getGenero() +
+                ", Rankings = " + rankings +
+                ", Partidas Jogadas = " + partidasJogadas;
     }
 }
