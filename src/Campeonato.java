@@ -1,4 +1,4 @@
-package src;
+import java.util.ArrayList;
 
 public class Campeonato {
     private TorneioDuplas torneioDuplas;
@@ -21,5 +21,4 @@ public class Campeonato {
             System.out.println("Medalha de ouro para os vencedores do torneio de duplas: " + vencedoresDuplas[0].getNome() + " e " + vencedoresDuplas[1].getNome());
         }
     }
-
 }

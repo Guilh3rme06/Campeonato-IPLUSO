@@ -274,7 +274,143 @@ public class GUI {
     }
 
     private void gerarTorneio() {
-        // Implementar lógica para gerar torneio
+        JFrame frameTorneio = new JFrame("Gerar Torneio");
+        frameTorneio.setSize(600, 400);
+        frameTorneio.setLayout(new BorderLayout());
+    
+        JPanel panelTorneio = new JPanel();
+        panelTorneio.setLayout(new GridLayout(10, 2, 10, 10));
+        panelTorneio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    
+        JLabel lblTipoTorneio = new JLabel("Tipo de Torneio:");
+        String[] tiposTorneio = {"Singulares", "Duplas"};
+        JComboBox<String> cbTipoTorneio = new JComboBox<>(tiposTorneio);
+    
+        JLabel lblGenero = new JLabel("Gênero:");
+        String[] generos = {"Masculino", "Feminino"};
+        JComboBox<String> cbGenero = new JComboBox<>(generos);
+    
+        JLabel lblNumEquipas = new JLabel("Número de Equipas:");
+        String[] numEquipas = {"4", "8"};
+        JComboBox<String> cbNumEquipas = new JComboBox<>(numEquipas);
+    
+        JLabel lblTipoCompeticao = new JLabel("Tipo de Competição:");
+        String[] tiposCompeticao = {"Pontos", "Eliminatórias"};
+        JComboBox<String> cbTipoCompeticao = new JComboBox<>(tiposCompeticao);
+    
+        JLabel lblJogadores = new JLabel("Jogadores Disponíveis:");
+        JComboBox<String> cbJogadores = new JComboBox<>();
+    
+        // Preencher a combobox com os jogadores disponíveis
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
+        for (Jogador jogador : jogadores) {
+            cbJogadores.addItem(jogador.getNome());
+        }
+    
+        ArrayList<String> jogadoresSelecionados = new ArrayList<>();
+        JTextArea textAreaJogadoresSelecionados = new JTextArea();
+        textAreaJogadoresSelecionados.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textAreaJogadoresSelecionados);
+    
+        JButton btnAdicionarJogador = new JButton("Adicionar");
+        btnAdicionarJogador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String jogadorSelecionado = (String) cbJogadores.getSelectedItem();
+                if (!jogadoresSelecionados.contains(jogadorSelecionado)) {
+                    jogadoresSelecionados.add(jogadorSelecionado);
+                    textAreaJogadoresSelecionados.append(jogadorSelecionado + "\n");
+                }
+            }
+        });
+    
+        cbTipoTorneio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbTipoTorneio.getSelectedItem().equals("Duplas")) {
+                    cbGenero.setSelectedItem("Misto");
+                    cbGenero.setEnabled(false);
+                } else {
+                    cbGenero.setEnabled(true);
+                }
+                updateJogadores(cbTipoTorneio, cbGenero, cbJogadores);
+            }
+        });
+    
+        cbGenero.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateJogadores(cbTipoTorneio, cbGenero, cbJogadores);
+            }
+        });
+    
+        JButton btnCriar = new JButton("Criar Torneio");
+        btnCriar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipoTorneio = (String) cbTipoTorneio.getSelectedItem();
+                String genero = (String) cbGenero.getSelectedItem();
+                int numEquipas = Integer.parseInt((String) cbNumEquipas.getSelectedItem());
+                String tipoCompeticao = (String) cbTipoCompeticao.getSelectedItem();
+    
+                if (tipoTorneio.equals("Singulares")) {
+                    criarTorneioSingulares(genero, numEquipas, tipoCompeticao, jogadoresSelecionados);
+                } else {
+                    criarTorneioDuplas(numEquipas, tipoCompeticao, jogadoresSelecionados);
+                }
+    
+                frameTorneio.dispose();
+            }
+        });
+    
+        panelTorneio.add(lblTipoTorneio);
+        panelTorneio.add(cbTipoTorneio);
+        panelTorneio.add(lblGenero);
+        panelTorneio.add(cbGenero);
+        panelTorneio.add(lblNumEquipas);
+        panelTorneio.add(cbNumEquipas);
+        panelTorneio.add(lblTipoCompeticao);
+        panelTorneio.add(cbTipoCompeticao);
+        panelTorneio.add(lblJogadores);
+        panelTorneio.add(cbJogadores);
+        panelTorneio.add(new JLabel());
+        panelTorneio.add(btnAdicionarJogador);
+        panelTorneio.add(new JLabel("Jogadores Selecionados:"));
+        panelTorneio.add(scrollPane);
+        panelTorneio.add(new JLabel());
+        panelTorneio.add(btnCriar);
+    
+        frameTorneio.add(panelTorneio, BorderLayout.CENTER);
+        frameTorneio.setVisible(true);
+    }
+    
+    private void updateJogadores(JComboBox<String> cbTipoTorneio, JComboBox<String> cbGenero, JComboBox<String> cbJogadores) {
+        cbJogadores.removeAllItems();
+        String tipoTorneio = (String) cbTipoTorneio.getSelectedItem();
+        String genero = (String) cbGenero.getSelectedItem();
+    
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
+        for (Jogador jogador : jogadores) {
+            if (tipoTorneio.equals("Singulares") && jogador.getGenero() == genero.charAt(0)) {
+                cbJogadores.addItem(jogador.getNome());
+            } else if (tipoTorneio.equals("Duplas")) {
+                cbJogadores.addItem(jogador.getNome());
+            }
+        }
+    }
+    
+    private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
+        // Implementar lógica para criar torneio de singulares
+        System.out.println("Criando torneio de singulares " + genero + " com " + numEquipas + " equipas.");
+        System.out.println("Tipo de competição: " + tipoCompeticao);
+        System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
+    }
+    
+    private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
+        // Implementar lógica para criar torneio de duplas
+        System.out.println("Criando torneio de duplas misto com " + numEquipas + " equipas.");
+        System.out.println("Tipo de competição: " + tipoCompeticao);
+        System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
     }
 
     private void visualizarCampeonato() {
