@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Classe abstrata que representa uma pessoa no campeonato.
  */
