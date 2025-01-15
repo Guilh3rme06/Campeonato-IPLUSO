@@ -482,23 +482,5 @@ public class GUI {
         frameCampeonato.add(panelCampeonato, BorderLayout.CENTER);
         frameCampeonato.setVisible(true);
     }
-
-    private String[] getNomesJogadores() {
-        ArrayList<Jogador> jogadores = Jogador.getJogadores();
-        String[] nomes = new String[jogadores.size()];
-        for (int i = 0; i < jogadores.size(); i++) {
-            nomes[i] = jogadores.get(i).getNome();
-        }
-        return nomes;
-    }
-
-    private String[] getNomesArbitros() {
-        ArrayList<Arbitro> arbitros = Arbitro.getArbitros();
-        String[] nomes = new String[arbitros.size()];
-        for (int i = 0; i < arbitros.size(); i++) {
-            nomes[i] = arbitros.get(i).getNome();
-        }
-        return nomes;
-    }
 }
 
