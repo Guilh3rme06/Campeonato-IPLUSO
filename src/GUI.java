@@ -407,10 +407,16 @@ public class GUI {
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
 
-        // Exibir informações do torneio de singulares
-        TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
-        ArrayList<Jogador> jogadores = Jogador.getJogadores();
-        torneioSingulares.iniciarTorneio(jogadores);
+        if (tipoCompeticao.equals("Eliminatórias")) {
+            // Exibir informações do torneio de singulares
+            TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
+            ArrayList<Jogador> jogadores = Jogador.getJogadores();
+            torneioSingulares.iniciarTorneio(jogadores);
+        }else{
+            System.out.println("Tipo de competição não suportado.");
+            System.out.println(tipoCompeticao);
+        }
+
     }
     
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
