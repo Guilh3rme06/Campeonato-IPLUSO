@@ -1,5 +1,3 @@
-package src;
-
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -279,41 +277,38 @@ public class GUI {
         JFrame frameTorneio = new JFrame("Gerar Torneio");
         frameTorneio.setSize(700, 600);
         frameTorneio.setLayout(new BorderLayout());
-    
+
         JPanel panelTorneio = new JPanel();
         panelTorneio.setLayout(new GridLayout(10, 2, 10, 10));
         panelTorneio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-    
+
         JLabel lblTipoTorneio = new JLabel("Tipo de Torneio:");
         String[] tiposTorneio = {"Singulares", "Duplas"};
         JComboBox<String> cbTipoTorneio = new JComboBox<>(tiposTorneio);
-    
+
         JLabel lblGenero = new JLabel("Gênero:");
         String[] generos = {"Masculino", "Feminino"};
         JComboBox<String> cbGenero = new JComboBox<>(generos);
-    
+
         JLabel lblNumEquipas = new JLabel("Número de Equipas:");
         String[] numEquipas = {"4", "8"};
         JComboBox<String> cbNumEquipas = new JComboBox<>(numEquipas);
-    
+
         JLabel lblTipoCompeticao = new JLabel("Tipo de Competição:");
         String[] tiposCompeticao = {"Pontos", "Eliminatórias"};
         JComboBox<String> cbTipoCompeticao = new JComboBox<>(tiposCompeticao);
-    
+
         JLabel lblJogadores = new JLabel("Jogadores Disponíveis:");
         JComboBox<String> cbJogadores = new JComboBox<>();
-    
+
         // Preencher a combobox com os jogadores disponíveis
-        ArrayList<Jogador> jogadores = Jogador.getJogadores();
-        for (Jogador jogador : jogadores) {
-            cbJogadores.addItem(jogador.getNome());
-        }
-    
+        updateJogadores(cbGenero, cbJogadores);
+
         ArrayList<String> jogadoresSelecionados = new ArrayList<>();
         JTextArea textAreaJogadoresSelecionados = new JTextArea();
         textAreaJogadoresSelecionados.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textAreaJogadoresSelecionados);
-    
+
         JButton btnAdicionarJogador = new JButton("Adicionar");
         btnAdicionarJogador.addActionListener(new ActionListener() {
             @Override
@@ -325,27 +320,14 @@ public class GUI {
                 }
             }
         });
-    
-        cbTipoTorneio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbTipoTorneio.getSelectedItem().equals("Duplas")) {
-                    cbGenero.setSelectedItem("Misto");
-                    cbGenero.setEnabled(false);
-                } else {
-                    cbGenero.setEnabled(true);
-                }
-                updateJogadores(cbTipoTorneio, cbGenero, cbJogadores);
-            }
-        });
-    
+
         cbGenero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateJogadores(cbTipoTorneio, cbGenero, cbJogadores);
+                updateJogadores(cbGenero, cbJogadores);
             }
         });
-    
+
         JButton btnCriar = new JButton("Criar Torneio");
         btnCriar.addActionListener(new ActionListener() {
             @Override
@@ -354,17 +336,17 @@ public class GUI {
                 String genero = (String) cbGenero.getSelectedItem();
                 int numEquipas = Integer.parseInt((String) cbNumEquipas.getSelectedItem());
                 String tipoCompeticao = (String) cbTipoCompeticao.getSelectedItem();
-    
+
                 if (tipoTorneio.equals("Singulares")) {
                     criarTorneioSingulares(genero, numEquipas, tipoCompeticao, jogadoresSelecionados);
                 } else {
                     criarTorneioDuplas(numEquipas, tipoCompeticao, jogadoresSelecionados);
                 }
-    
+
                 frameTorneio.dispose();
             }
         });
-    
+
         panelTorneio.add(lblTipoTorneio);
         panelTorneio.add(cbTipoTorneio);
         panelTorneio.add(lblGenero);
@@ -381,26 +363,24 @@ public class GUI {
         panelTorneio.add(scrollPane);
         panelTorneio.add(new JLabel());
         panelTorneio.add(btnCriar);
-    
+
         frameTorneio.add(panelTorneio, BorderLayout.CENTER);
         frameTorneio.setVisible(true);
     }
-    
-    private void updateJogadores(JComboBox<String> cbTipoTorneio, JComboBox<String> cbGenero, JComboBox<String> cbJogadores) {
+
+    private void updateJogadores(JComboBox<String> cbGenero, JComboBox<String> cbJogadores) {
         cbJogadores.removeAllItems();
-        String tipoTorneio = (String) cbTipoTorneio.getSelectedItem();
-        String genero = (String) cbGenero.getSelectedItem();
-    
+        String generoSelecionado = (String) cbGenero.getSelectedItem();
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
         for (Jogador jogador : jogadores) {
-            if (tipoTorneio.equals("Singulares") && jogador.getGenero() == genero.charAt(0)) {
+            if (generoSelecionado.equals("Masculino") && (jogador.getGenero() == 'M' || jogador.getGenero() == 'm')) {
                 cbJogadores.addItem(jogador.getNome());
-            } else if (tipoTorneio.equals("Duplas")) {
+            } else if (generoSelecionado.equals("Feminino") && (jogador.getGenero() == 'F' || jogador.getGenero() == 'f')) {
                 cbJogadores.addItem(jogador.getNome());
             }
         }
     }
-    
+        
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
         // Implementar lógica para criar torneio de singulares
         System.out.println("Criando torneio de singulares " + genero + " com " + numEquipas + " equipas.");
