@@ -277,76 +277,98 @@ public class GUI {
         JFrame frameTorneio = new JFrame("Gerar Torneio");
         frameTorneio.setSize(700, 600);
         frameTorneio.setLayout(new BorderLayout());
-
+    
         JPanel panelTorneio = new JPanel();
         panelTorneio.setLayout(new GridLayout(10, 2, 10, 10));
         panelTorneio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
+    
         JLabel lblTipoTorneio = new JLabel("Tipo de Torneio:");
         String[] tiposTorneio = {"Singulares", "Duplas"};
         JComboBox<String> cbTipoTorneio = new JComboBox<>(tiposTorneio);
-
+    
         JLabel lblGenero = new JLabel("Gênero:");
         String[] generos = {"Masculino", "Feminino"};
         JComboBox<String> cbGenero = new JComboBox<>(generos);
-
+    
         JLabel lblNumEquipas = new JLabel("Número de Equipas:");
         String[] numEquipas = {"4", "8"};
         JComboBox<String> cbNumEquipas = new JComboBox<>(numEquipas);
-
+    
         JLabel lblTipoCompeticao = new JLabel("Tipo de Competição:");
         String[] tiposCompeticao = {"Pontos", "Eliminatórias"};
         JComboBox<String> cbTipoCompeticao = new JComboBox<>(tiposCompeticao);
-
+    
         JLabel lblJogadores = new JLabel("Jogadores Disponíveis:");
         JComboBox<String> cbJogadores = new JComboBox<>();
-
+    
         // Preencher a combobox com os jogadores disponíveis
         updateJogadores(cbGenero, cbJogadores);
-
+    
         ArrayList<String> jogadoresSelecionados = new ArrayList<>();
         JTextArea textAreaJogadoresSelecionados = new JTextArea();
         textAreaJogadoresSelecionados.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textAreaJogadoresSelecionados);
-
+    
         JButton btnAdicionarJogador = new JButton("Adicionar");
         btnAdicionarJogador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String jogadorSelecionado = (String) cbJogadores.getSelectedItem();
-                if (!jogadoresSelecionados.contains(jogadorSelecionado)) {
+                int maxJogadores = Integer.parseInt((String) cbNumEquipas.getSelectedItem()) * (cbTipoTorneio.getSelectedItem().equals("Duplas") ? 2 : 1);
+                if (!jogadoresSelecionados.contains(jogadorSelecionado) && jogadoresSelecionados.size() < maxJogadores) {
                     jogadoresSelecionados.add(jogadorSelecionado);
                     textAreaJogadoresSelecionados.append(jogadorSelecionado + "\n");
+                } else {
+                    JOptionPane.showMessageDialog(frameTorneio, "Número máximo de jogadores atingido.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-
+    
         cbGenero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateJogadores(cbGenero, cbJogadores);
             }
         });
-
+    
+        cbTipoTorneio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cbTipoTorneio.getSelectedItem().equals("Duplas")) {
+                    cbGenero.setEnabled(false);
+                    updateJogadores(null, cbJogadores);
+                } else {
+                    cbGenero.setEnabled(true);
+                    updateJogadores(cbGenero, cbJogadores);
+                }
+            }
+        });
+    
         JButton btnCriar = new JButton("Criar Torneio");
         btnCriar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String tipoTorneio = (String) cbTipoTorneio.getSelectedItem();
-                String genero = (String) cbGenero.getSelectedItem();
+                String genero = cbGenero.isEnabled() ? (String) cbGenero.getSelectedItem() : null;
                 int numEquipas = Integer.parseInt((String) cbNumEquipas.getSelectedItem());
                 String tipoCompeticao = (String) cbTipoCompeticao.getSelectedItem();
-
+                int minJogadores = numEquipas * (tipoTorneio.equals("Duplas") ? 2 : 1);
+    
+                if (jogadoresSelecionados.size() < minJogadores) {
+                    JOptionPane.showMessageDialog(frameTorneio, "Número insuficiente de jogadores selecionados.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+    
                 if (tipoTorneio.equals("Singulares")) {
                     criarTorneioSingulares(genero, numEquipas, tipoCompeticao, jogadoresSelecionados);
                 } else {
                     criarTorneioDuplas(numEquipas, tipoCompeticao, jogadoresSelecionados);
                 }
-
+    
                 frameTorneio.dispose();
             }
         });
-
+    
         panelTorneio.add(lblTipoTorneio);
         panelTorneio.add(cbTipoTorneio);
         panelTorneio.add(lblGenero);
@@ -363,29 +385,32 @@ public class GUI {
         panelTorneio.add(scrollPane);
         panelTorneio.add(new JLabel());
         panelTorneio.add(btnCriar);
-
+    
         frameTorneio.add(panelTorneio, BorderLayout.CENTER);
         frameTorneio.setVisible(true);
     }
-
+        
     private void updateJogadores(JComboBox<String> cbGenero, JComboBox<String> cbJogadores) {
         cbJogadores.removeAllItems();
-        String generoSelecionado = (String) cbGenero.getSelectedItem();
+        String generoSelecionado = cbGenero != null ? (String) cbGenero.getSelectedItem() : null;
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
         for (Jogador jogador : jogadores) {
-            if (generoSelecionado.equals("Masculino") && (jogador.getGenero() == 'M' || jogador.getGenero() == 'm')) {
-                cbJogadores.addItem(jogador.getNome());
-            } else if (generoSelecionado.equals("Feminino") && (jogador.getGenero() == 'F' || jogador.getGenero() == 'f')) {
+            if (generoSelecionado == null || (generoSelecionado.equals("Masculino") && (jogador.getGenero() == 'M' || jogador.getGenero() == 'm')) || (generoSelecionado.equals("Feminino") && (jogador.getGenero() == 'F' || jogador.getGenero() == 'f'))) {
                 cbJogadores.addItem(jogador.getNome());
             }
         }
     }
-        
+            
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
         // Implementar lógica para criar torneio de singulares
         System.out.println("Criando torneio de singulares " + genero + " com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
+
+        // Exibir informações do torneio de singulares
+        TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
+        torneioSingulares.iniciarTorneio(jogadores);
     }
     
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados) {
@@ -411,19 +436,19 @@ public class GUI {
         // Adicionar informações sobre o campeonato
         StringBuilder info = new StringBuilder();
         info.append("Estado dos Torneios:\n");
-    
-        // Exibir informações do torneio de singulares
+        
+        info.append("Torneio de Singulares:\n");
         TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
-        torneioSingulares.iniciarTorneio(jogadores);
-    
-        info.append("Torneio de Singulares:\n");
-        for (PartidaSingulares partida : torneioSingulares.partidas) {
+        Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
+        if (vencedorSingulares != null) {
+            info.append("Vencedor do Torneio de Singulares: ").append(vencedorSingulares.getNome()).append("\n");
+        }
+        for (PartidaSingulares partida : torneioSingulares.getPartidas()) {
             info.append("Partida: ").append(partida.getJogador1().getNome()).append(" vs ").append(partida.getJogador2().getNome()).append("\n");
         }
     
         // Determinar o vencedor do torneio de singulares
-        Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
         if (vencedorSingulares != null) {
             info.append("Vencedor do Torneio de Singulares: ").append(vencedorSingulares.getNome()).append("\n");
         }
@@ -470,3 +495,4 @@ public class GUI {
         return nomes;
     }
 }
+
