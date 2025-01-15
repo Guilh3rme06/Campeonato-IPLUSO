@@ -1,5 +1,3 @@
-package src;
-
 import java.util.ArrayList;
 
 public abstract class TorneioSingulares {
@@ -13,5 +11,8 @@ public abstract class TorneioSingulares {
         partidas.add(partida);
     }
 
+    public ArrayList<PartidaSingulares> getPartidas() {
+        return partidas;
+    }
     public abstract Jogador determinarVencedorTorneioSingulares();
 }
