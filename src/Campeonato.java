@@ -1,14 +1,12 @@
 package src;
 
-import java.util.ArrayList;
-
 public class Campeonato {
     private TorneioDuplas torneioDuplas;
     private TorneioSingulares torneioSingulares;
 
     public Campeonato() {
         this.torneioDuplas = new TorneioDuplas();
-        this.torneioSingulares = new TorneioSingularesEleminatorio(); // Exemplo de implementação concreta
+        this.torneioSingulares = new TorneioSingularesEleminatorio();
     }
 
     public void adicionarTorneioSingulares(TorneioSingulares torneio) {
