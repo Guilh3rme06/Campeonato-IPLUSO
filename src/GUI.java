@@ -10,9 +10,11 @@ import java.util.ArrayList;
  */
 public class GUI {
     private Campeonato campeonato;
-    private String vencedorTorneioELeminatorias;
-    private String vencedorTorneioPontos;
+    private String vencedorTorneioSingularEleminatorio;
+    private String vencedorTorneioSingularPontos;
     private String vencedorTorneioDuplas;
+    private String resultadosTorneioSingulares;
+    private String resultadosTorneioDuplas;
 
     public GUI() {
         campeonato = new Campeonato();
@@ -445,36 +447,129 @@ public class GUI {
 
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao,
             ArrayList<String> jogadoresSelecionados, String arbitroResponsavel) {
-        // Implementar lógica para criar torneio de singulares
         System.out.println("Criando torneio de singulares " + genero + " com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
         System.out.println("Árbitro responsável: " + arbitroResponsavel);
 
+        TorneioSingulares torneioSingulares;
         if (tipoCompeticao.equals("Eliminatórias")) {
-            // Exibir informações do torneio de singulares
-            TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
-            ArrayList<Jogador> jogadores = Jogador.getJogadores();
-            torneioSingulares.iniciarTorneio(jogadores);
+            torneioSingulares = new TorneioSingularesEleminatorio();
         } else {
-            System.out.println("Tipo de competição não suportado.");
-            System.out.println(tipoCompeticao);
+            torneioSingulares = new TorneioSingularesPontos();
         }
 
+        ArrayList<Jogador> jogadores = new ArrayList<>();
+        for (String nomeJogador : jogadoresSelecionados) {
+            for (Jogador jogador : Jogador.getJogadores()) {
+                if (jogador.getNome().equals(nomeJogador)) {
+                    jogadores.add(jogador);
+                    break;
+                }
+            }
+        }
+
+        StringBuilder resultados = new StringBuilder();
+        Jogador ultimoVencedor = null;
+        // Adicionar partidas ao torneio
+        if (tipoCompeticao.equals("Eliminatórias")) {
+            while (jogadores.size() > 1) {
+                ArrayList<Jogador> vencedoresRodada = new ArrayList<>();
+                for (int i = 0; i < jogadores.size(); i += 2) {
+                    if (i + 1 < jogadores.size()) {
+                        PartidaSingulares partida = new PartidaSingulares(jogadores.get(i), jogadores.get(i + 1), null);
+                        torneioSingulares.adicionarPartida(partida);
+                        // Determinar vencedor da partida
+                        Jogador vencedorPartida = partida.determinarVencedor();
+                        vencedoresRodada.add(vencedorPartida);
+                        ultimoVencedor = vencedorPartida;
+                        resultados.append("O vencedor da Partida Singular é: ").append(vencedorPartida.getNome())
+                                .append("\n");
+                    }
+                }
+                jogadores = vencedoresRodada;
+            }
+            // Determinar vencedor do torneio
+            if (ultimoVencedor != null) {
+                vencedorTorneioSingularEleminatorio = ultimoVencedor.getNome();
+                resultados.append("O vencedor do Torneio de Singulares é: ").append(ultimoVencedor.getNome())
+                        .append("\n");
+            }
+        } else {
+            for (int i = 0; i < jogadores.size(); i++) {
+                for (int j = i + 1; j < jogadores.size(); j++) {
+                    PartidaSingulares partida = new PartidaSingulares(jogadores.get(i), jogadores.get(j), null);
+                    torneioSingulares.adicionarPartida(partida);
+                    // Determinar vencedor da partida
+                    Jogador vencedorPartida = partida.determinarVencedor();
+                    resultados.append("O vencedor da Partida Singular é: ").append(vencedorPartida.getNome())
+                            .append("\n");
+                }
+            }
+            // Determinar vencedor do torneio
+            Jogador vencedorTorneio = torneioSingulares.determinarVencedorTorneioSingulares();
+            if (vencedorTorneio != null) {
+                vencedorTorneioSingularPontos = vencedorTorneio.getNome();
+                resultados.append("O vencedor do Torneio de Singulares é: ").append(vencedorTorneio.getNome())
+                        .append("\n");
+            }
+        }
+
+        campeonato.adicionarTorneioSingulares(torneioSingulares);
+        resultadosTorneioSingulares = resultados.toString();
     }
 
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados,
             String arbitroResponsavel) {
-        // Implementar lógica para criar torneio de duplas
         System.out.println("Criando torneio de duplas misto com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
         System.out.println("Árbitro responsável: " + arbitroResponsavel);
+
+        TorneioDuplasEliminatorio torneioDuplas;
+        if (tipoCompeticao.equals("Eliminatórias")) {
+            torneioDuplas = new TorneioDuplasEliminatorio(Arbitro.getArbitros());
+        } else {
+            // Implementar lógica para torneio de pontos, se necessário
+            return;
+        }
+
+        ArrayList<Jogador> jogadores = new ArrayList<>();
+        for (String nomeJogador : jogadoresSelecionados) {
+            for (Jogador jogador : Jogador.getJogadores()) {
+                if (jogador.getNome().equals(nomeJogador)) {
+                    jogadores.add(jogador);
+                    break;
+                }
+            }
+        }
+
+        StringBuilder resultados = new StringBuilder();
+        ArrayList<Jogador[]> duplas = new ArrayList<>();
+        for (int i = 0; i < jogadores.size(); i += 2) {
+            if (i + 1 < jogadores.size()) {
+                Jogador[] dupla = { jogadores.get(i), jogadores.get(i + 1) };
+                duplas.add(dupla);
+            }
+        }
+
+        torneioDuplas.iniciarTorneio(duplas);
+
+        // Determinar vencedores do torneio
+        Jogador[] vencedoresTorneio = torneioDuplas.determinarVencedorTorneioDuplas();
+        if (vencedoresTorneio != null && vencedoresTorneio.length == 2) {
+            vencedorTorneioDuplas = vencedoresTorneio[0].getNome() + " e " + vencedoresTorneio[1].getNome();
+            resultados.append("Os vencedores do Torneio de Duplas são: ").append(vencedoresTorneio[0].getNome())
+                    .append(" e ").append(vencedoresTorneio[1].getNome()).append("\n");
+        }
+
+        campeonato.adicionarTorneioDuplas(torneioDuplas);
+        resultadosTorneioDuplas = resultados.toString();
     }
 
     private void visualizarCampeonato() {
         JFrame frameCampeonato = new JFrame("Visualizar Campeonato");
-        frameCampeonato.setSize(600, 400);
+        frameCampeonato.setSize(800, 600);
         frameCampeonato.setLayout(new BorderLayout());
 
         JPanel panelCampeonato = new JPanel();
@@ -489,28 +584,70 @@ public class GUI {
         StringBuilder info = new StringBuilder();
         info.append("Estado dos Torneios:\n");
 
+        // Torneio de Singulares
         info.append("Torneio de Singulares:\n");
-        TorneioSingularesEleminatorio torneioSingulares = new TorneioSingularesEleminatorio();
-        ArrayList<Jogador> jogadores = Jogador.getJogadores();
-        Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
-        if (vencedorSingulares != null) {
-            info.append("Vencedor do Torneio de Singulares: ").append(vencedorSingulares.getNome()).append("\n");
+        if (vencedorTorneioSingularEleminatorio != null) {
+            info.append("Vencedor do Torneio de Singulares (Eliminatórias): ")
+                    .append(vencedorTorneioSingularEleminatorio).append("\n");
         }
-        for (PartidaSingulares partida : torneioSingulares.getPartidas()) {
-            info.append("Partida: ").append(partida.getJogador1().getNome()).append(" vs ")
-                    .append(partida.getJogador2().getNome()).append("\n");
+        if (vencedorTorneioSingularPontos != null) {
+            info.append("Vencedor do Torneio de Singulares (Pontos): ").append(vencedorTorneioSingularPontos)
+                    .append("\n");
         }
 
-        // Determinar o vencedor do torneio de singulares
-        if (vencedorSingulares != null) {
-            info.append("Vencedor do Torneio de Singulares: ").append(vencedorSingulares.getNome()).append("\n");
+        // Torneio de Duplas
+        info.append("\nTorneio de Duplas:\n");
+        if (vencedorTorneioDuplas != null) {
+            info.append("Vencedores do Torneio de Duplas: ").append(vencedorTorneioDuplas).append("\n");
         }
 
         // Exibir rankings dos jogadores
         info.append("\nRankings dos Jogadores:\n");
+        ArrayList<Jogador> jogadores = Jogador.getJogadores();
         for (Jogador jogador : jogadores) {
             info.append(jogador.getNome()).append(" - Ranking: ").append(jogador.getRankings())
                     .append(" - Partidas Jogadas: ").append(jogador.getPartidasJogadas()).append("\n");
+        }
+
+        // Jogadores com maior e pior ranking
+        Jogador melhorMasculino = null;
+        Jogador piorMasculino = null;
+        Jogador melhorFeminino = null;
+        Jogador piorFeminino = null;
+
+        for (Jogador jogador : jogadores) {
+            if (jogador.getGenero() == 'M' || jogador.getGenero() == 'm') {
+                if (melhorMasculino == null || jogador.getRankings() > melhorMasculino.getRankings()) {
+                    melhorMasculino = jogador;
+                }
+                if (piorMasculino == null || jogador.getRankings() < piorMasculino.getRankings()) {
+                    piorMasculino = jogador;
+                }
+            } else if (jogador.getGenero() == 'F' || jogador.getGenero() == 'f') {
+                if (melhorFeminino == null || jogador.getRankings() > melhorFeminino.getRankings()) {
+                    melhorFeminino = jogador;
+                }
+                if (piorFeminino == null || jogador.getRankings() < piorFeminino.getRankings()) {
+                    piorFeminino = jogador;
+                }
+            }
+        }
+
+        if (melhorMasculino != null) {
+            info.append("\nMelhor Jogador Masculino: ").append(melhorMasculino.getNome()).append(" - Ranking: ")
+                    .append(melhorMasculino.getRankings()).append("\n");
+        }
+        if (piorMasculino != null) {
+            info.append("Pior Jogador Masculino: ").append(piorMasculino.getNome()).append(" - Ranking: ")
+                    .append(piorMasculino.getRankings()).append("\n");
+        }
+        if (melhorFeminino != null) {
+            info.append("Melhor Jogadora Feminina: ").append(melhorFeminino.getNome()).append(" - Ranking: ")
+                    .append(melhorFeminino.getRankings()).append("\n");
+        }
+        if (piorFeminino != null) {
+            info.append("Pior Jogadora Feminina: ").append(piorFeminino.getNome()).append(" - Ranking: ")
+                    .append(piorFeminino.getRankings()).append("\n");
         }
 
         textArea.setText(info.toString());
@@ -521,7 +658,7 @@ public class GUI {
         btnAtribuirPremio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar lógica para atribuir prémio
+                campeonato.medalharVencedorTorneios();
             }
         });
 

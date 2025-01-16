@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class TorneioSingularesPontos extends TorneioSingulares {
     public TorneioSingularesPontos() {
         super();
@@ -18,13 +17,15 @@ public class TorneioSingularesPontos extends TorneioSingulares {
 
         // Calcular os pontos dos jogadores
         for (PartidaSingulares partida : partidas) {
-            Jogador vencedorPartida = partida.determinarVencedor();
-            int index = jogadores.indexOf(vencedorPartida);
-            if (index == -1) {
-                jogadores.add(vencedorPartida);
-                pontos.add(3);
-            } else {
-                pontos.set(index, pontos.get(index) + 3);
+            Jogador vencedor = partida.determinarVencedor();
+            if (vencedor != null) {
+                int index = jogadores.indexOf(vencedor);
+                if (index == -1) {
+                    jogadores.add(vencedor);
+                    pontos.add(1);
+                } else {
+                    pontos.set(index, pontos.get(index) + 1);
+                }
             }
         }
 

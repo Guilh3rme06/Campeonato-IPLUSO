@@ -34,7 +34,7 @@ public class TorneioSingularesEleminatorio extends TorneioSingulares {
 
         return vencedores.get(0);
     }
-
+ 
     public void iniciarTorneio(ArrayList<Jogador> jogadores) {
         ArrayList<Jogador> participantes = new ArrayList<>(jogadores);
 
