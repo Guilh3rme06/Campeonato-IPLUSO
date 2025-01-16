@@ -1,11 +1,13 @@
 package src;
 
+import java.util.ArrayList;
+
 public class Campeonato {
     private TorneioDuplas torneioDuplas;
     private TorneioSingulares torneioSingulares;
 
     public Campeonato() {
-        this.torneioDuplas = new TorneioDuplas();
+        this.torneioDuplas = new TorneioDuplasEliminatorio(new ArrayList<>());
         this.torneioSingulares = new TorneioSingularesEleminatorio();
     }
 
@@ -19,7 +21,7 @@ public class Campeonato {
 
     public void medalharVencedorTorneios() {
         Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
-        Jogador[] vencedoresDuplas = torneioDuplas.getVencedores();
+        Jogador[] vencedoresDuplas = torneioDuplas.determinarVencedorTorneioDuplas();
 
         if (vencedorSingulares != null) {
             System.out.println("Medalha de ouro para o vencedor do torneio de singulares: " + vencedorSingulares.getNome());

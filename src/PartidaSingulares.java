@@ -39,9 +39,9 @@ public class PartidaSingulares implements ControloPartida {
         this.jogador2.setPartidasJogadas(jogador2.getPartidasJogadas() + 1);
 
         Random vencedorPartidaSingular = new Random();
-        int vencedor = vencedorPartidaSingular.nextInt(2) + 1;
+        int vencedor = vencedorPartidaSingular.nextInt(2);
 
-        if (vencedor == 1) {
+        if (vencedor == 0) {
             System.out.println("O vencedor da Partida Singular é: " + this.jogador1.getNome());
             this.jogador1.setRankings(jogador1.getRankings() + 5);
             return this.jogador1;

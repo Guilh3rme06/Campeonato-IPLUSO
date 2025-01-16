@@ -2,8 +2,8 @@ package src;
 
 import java.util.ArrayList;
 
-public class TorneioDuplas {
-    private ArrayList<PartidaDuplas> partidas;
+public abstract class TorneioDuplas {
+    protected ArrayList<PartidaDuplas> partidas;
 
     public TorneioDuplas() {
         this.partidas = new ArrayList<>();
@@ -13,17 +13,9 @@ public class TorneioDuplas {
         partidas.add(partida);
     }
 
-    public Jogador[] determinarVencedorTorneioDuplas() {
-        if (partidas.isEmpty()) {
-            return null;
-        }
-
-        // Exemplo de lógica simples: os vencedores da última partida são os vencedores do torneio
-        PartidaDuplas ultimaPartida = partidas.get(partidas.size() - 1);
-        return ultimaPartida.determinarVencedores();
+    public ArrayList<PartidaDuplas> getPartidas() {
+        return partidas;
     }
 
-    public Jogador[] getVencedores() {
-        return determinarVencedorTorneioDuplas();
-    }
+    public abstract Jogador[] determinarVencedorTorneioDuplas();
 }
