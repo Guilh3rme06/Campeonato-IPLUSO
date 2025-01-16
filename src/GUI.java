@@ -10,6 +10,9 @@ import java.util.ArrayList;
  */
 public class GUI {
     private Campeonato campeonato;
+    private String vencedorTorneioELeminatorias;
+    private String vencedorTorneioPontos;
+    private String vencedorTorneioDuplas;
 
     public GUI() {
         campeonato = new Campeonato();
