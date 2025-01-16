@@ -379,6 +379,12 @@ public class GUI {
                 int minJogadores = numEquipas * (tipoTorneio.equals("Duplas") ? 2 : 1);
                 String arbitroResponsavel = (String) cbArbitros.getSelectedItem();
 
+                if (arbitroResponsavel == null || arbitroResponsavel.isEmpty()) {
+                    JOptionPane.showMessageDialog(frameTorneio, "Por favor, selecione um árbitro responsável.", "Erro",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 if (jogadoresSelecionados.size() < minJogadores) {
                     JOptionPane.showMessageDialog(frameTorneio, "Número insuficiente de jogadores selecionados.",
                             "Erro", JOptionPane.ERROR_MESSAGE);
