@@ -48,4 +48,14 @@ public class Premio {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public void definirPremioSingulares() {
+        this.tipo = "Singulares";
+        this.valor = 30000;
+    }
+
+    public void definirPremioDuplas() {
+        this.tipo = "Duplas";
+        this.valor = 40000;
+    }
 }
