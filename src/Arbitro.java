@@ -3,30 +3,16 @@ package src;
 import java.util.ArrayList;
 
 /**
- * Classe que representa um árbitro no campeonato.
+ * Classe que representa um árbitro.
  */
 public class Arbitro extends Pessoa {
     private String certificacoes;
     private static ArrayList<Arbitro> arbitros = new ArrayList<>();
 
-    /**
-     * Construtor da classe Arbitro.
-     * @param nome Nome do árbitro.
-     * @param idade Idade do árbitro.
-     * @param genero Gênero do árbitro.
-     * @param certificacoes Certificações do árbitro.
-     */
+    // Construtor
     public Arbitro(String nome, int idade, char genero, String certificacoes) {
         super(nome, idade, genero);
         this.certificacoes = certificacoes;
-    }
-
-    /**
-     * Obtém as certificações do árbitro.
-     * @return Certificações do árbitro.
-     */
-    public String getCertificacoes() {
-        return certificacoes;
     }
 
     /**
@@ -37,10 +23,18 @@ public class Arbitro extends Pessoa {
         this.certificacoes = certificacoes;
     }
 
-    public static void adicionarArbitro(Arbitro arbitro){
+    /**
+     * Adiciona um árbitro à lista de árbitros.
+     * @param arbitro Árbitro a ser adicionado.
+     */
+    public static void adicionarArbitro(Arbitro arbitro) {
         arbitros.add(arbitro);
     }
 
+    /**
+     * Obtém a lista de árbitros.
+     * @return Lista de árbitros.
+     */
     public static ArrayList<Arbitro> getArbitros() {
         return arbitros;
     }
@@ -48,7 +42,7 @@ public class Arbitro extends Pessoa {
     @Override
     public String toString() {
         return "Arbitro{" +
-                "nome='" + getNome() +
+                "nome='" + getNome() + '\'' +
                 ", idade=" + getIdade() +
                 ", genero=" + getGenero() +
                 ", certificacoes='" + certificacoes + '\'' +

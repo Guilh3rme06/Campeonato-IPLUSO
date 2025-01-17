@@ -49,11 +49,17 @@ public class Premio {
         this.valor = valor;
     }
 
+    /**
+     * Define o prêmio para torneios de singulares.
+     */
     public void definirPremioSingulares() {
         this.tipo = "Singulares";
         this.valor = 30000;
     }
 
+    /**
+     * Define o prêmio para torneios de duplas.
+     */
     public void definirPremioDuplas() {
         this.tipo = "Duplas";
         this.valor = 40000;

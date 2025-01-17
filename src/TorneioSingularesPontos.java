@@ -1,10 +1,22 @@
+package src;
+
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um torneio de singulares por pontos.
+ */
 public class TorneioSingularesPontos extends TorneioSingulares {
+    /**
+     * Construtor para inicializar um torneio de singulares por pontos.
+     */
     public TorneioSingularesPontos() {
         super();
     }
 
+    /**
+     * Determina o vencedor do torneio de singulares por pontos.
+     * @return Vencedor do torneio.
+     */
     @Override
     public Jogador determinarVencedorTorneioSingulares() {
         if (partidas.isEmpty()) {
