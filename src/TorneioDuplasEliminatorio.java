@@ -1,5 +1,3 @@
-package src;
-
 import java.util.ArrayList;
 
 public class TorneioDuplasEliminatorio extends TorneioDuplas {
@@ -28,9 +26,9 @@ public class TorneioDuplasEliminatorio extends TorneioDuplas {
                     Jogador[] dupla1 = vencedores.get(i);
                     Jogador[] dupla2 = vencedores.get(i + 1);
                     Arbitro arbitro = arbitros.get((int) (Math.random() * arbitros.size()));
-                    PartidaDuplas novaPartida = new PartidaDuplas(dupla1, dupla2, arbitro);
-                    adicionarPartida(novaPartida);
-                    proximosVencedores.add(novaPartida.determinarVencedores());
+                    PartidaDuplas partida = new PartidaDuplas(dupla1, dupla2, arbitro);
+                    adicionarPartida(partida);
+                    proximosVencedores.add(partida.determinarVencedores());
                 } else {
                     proximosVencedores.add(vencedores.get(i));
                 }
@@ -45,7 +43,7 @@ public class TorneioDuplasEliminatorio extends TorneioDuplas {
         ArrayList<Jogador[]> participantes = new ArrayList<>(duplas);
 
         while (participantes.size() > 1) {
-            ArrayList<Jogador[]> proximosParticipantes = new ArrayList<>();
+            ArrayList<Jogador[]> proximosVencedores = new ArrayList<>();
             for (int i = 0; i < participantes.size(); i += 2) {
                 if (i + 1 < participantes.size()) {
                     Jogador[] dupla1 = participantes.get(i);
@@ -53,13 +51,12 @@ public class TorneioDuplasEliminatorio extends TorneioDuplas {
                     Arbitro arbitro = arbitros.get((int) (Math.random() * arbitros.size()));
                     PartidaDuplas partida = new PartidaDuplas(dupla1, dupla2, arbitro);
                     adicionarPartida(partida);
-                    Jogador[] vencedores = partida.determinarVencedores();
-                    proximosParticipantes.add(vencedores);
+                    proximosVencedores.add(partida.determinarVencedores());
                 } else {
-                    proximosParticipantes.add(participantes.get(i));
+                    proximosVencedores.add(participantes.get(i));
                 }
             }
-            participantes = proximosParticipantes;
+            participantes = proximosVencedores;
         }
     }
 }

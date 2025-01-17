@@ -15,6 +15,8 @@ public class GUI {
     private String vencedorTorneioDuplas;
     private String resultadosTorneioSingulares;
     private String resultadosTorneioDuplas;
+    private String vencedorTorneioDuplasEliminatorio;
+    private String vencedorTorneioDuplasPontos;
 
     public GUI() {
         campeonato = new Campeonato();
@@ -447,7 +449,7 @@ public class GUI {
 
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao,
             ArrayList<String> jogadoresSelecionados, String arbitroResponsavel) {
-        System.out.println("Criando torneio de singulares " + genero + " com " + numEquipas + " equipas.");
+        System.out.println("A criar um torneio de singulares " + genero + " com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
         System.out.println("Árbitro responsável: " + arbitroResponsavel);
@@ -521,17 +523,16 @@ public class GUI {
 
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados,
             String arbitroResponsavel) {
-        System.out.println("Criando torneio de duplas misto com " + numEquipas + " equipas.");
+        System.out.println("A criar um torneio de duplas misto com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
         System.out.println("Árbitro responsável: " + arbitroResponsavel);
 
-        TorneioDuplasEliminatorio torneioDuplas;
+        TorneioDuplas torneioDuplas;
         if (tipoCompeticao.equals("Eliminatórias")) {
             torneioDuplas = new TorneioDuplasEliminatorio(Arbitro.getArbitros());
         } else {
-            // Implementar lógica para torneio de pontos, se necessário
-            return;
+            torneioDuplas = new TorneioDuplasPontos();
         }
 
         ArrayList<Jogador> jogadores = new ArrayList<>();
@@ -544,7 +545,6 @@ public class GUI {
             }
         }
 
-        StringBuilder resultados = new StringBuilder();
         ArrayList<Jogador[]> duplas = new ArrayList<>();
         for (int i = 0; i < jogadores.size(); i += 2) {
             if (i + 1 < jogadores.size()) {
@@ -553,18 +553,21 @@ public class GUI {
             }
         }
 
-        torneioDuplas.iniciarTorneio(duplas);
-
-        // Determinar vencedores do torneio
-        Jogador[] vencedoresTorneio = torneioDuplas.determinarVencedorTorneioDuplas();
-        if (vencedoresTorneio != null && vencedoresTorneio.length == 2) {
-            vencedorTorneioDuplas = vencedoresTorneio[0].getNome() + " e " + vencedoresTorneio[1].getNome();
-            resultados.append("Os vencedores do Torneio de Duplas são: ").append(vencedoresTorneio[0].getNome())
-                    .append(" e ").append(vencedoresTorneio[1].getNome()).append("\n");
+        if (tipoCompeticao.equals("Eliminatórias")) {
+            ((TorneioDuplasEliminatorio) torneioDuplas).iniciarTorneio(duplas);
+            Jogador[] vencedores = torneioDuplas.determinarVencedorTorneioDuplas();
+            if (vencedores != null && vencedores.length == 2) {
+                vencedorTorneioDuplasEliminatorio = vencedores[0].getNome() + " e " + vencedores[1].getNome();
+            }
+        } else {
+            ((TorneioDuplasPontos) torneioDuplas).iniciarTorneio(duplas);
+            Jogador[] vencedores = torneioDuplas.determinarVencedorTorneioDuplas();
+            if (vencedores != null && vencedores.length == 2) {
+                vencedorTorneioDuplasPontos = vencedores[0].getNome() + " e " + vencedores[1].getNome();
+            }
         }
 
         campeonato.adicionarTorneioDuplas(torneioDuplas);
-        resultadosTorneioDuplas = resultados.toString();
     }
 
     private void visualizarCampeonato() {
@@ -596,9 +599,13 @@ public class GUI {
         }
 
         // Torneio de Duplas
-        info.append("\nTorneio de Duplas:\n");
-        if (vencedorTorneioDuplas != null) {
-            info.append("Vencedores do Torneio de Duplas: ").append(vencedorTorneioDuplas).append("\n");
+        info.append("Torneio de Duplas:\n");
+        if (vencedorTorneioDuplasEliminatorio != null) {
+            info.append("Vencedor do Torneio de Duplas (Eliminatórias): ").append(vencedorTorneioDuplasEliminatorio)
+                    .append("\n");
+        }
+        if (vencedorTorneioDuplasPontos != null) {
+            info.append("Vencedor do Torneio de Duplas (Pontos): ").append(vencedorTorneioDuplasPontos).append("\n");
         }
 
         // Exibir rankings dos jogadores
@@ -651,20 +658,78 @@ public class GUI {
         }
 
         textArea.setText(info.toString());
-
         panelCampeonato.add(scrollPane, BorderLayout.CENTER);
 
+        // Botão para exportar rankings
+        JButton btnExportarRankings = new JButton("Export Rankings");
+        btnExportarRankings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Campeonato.exportarRankingsParaFicheiro("rankings.txt");
+            }
+        });
+
+        // Botão para atribuir prêmio
         JButton btnAtribuirPremio = new JButton("Atribuir Prémio");
         btnAtribuirPremio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                campeonato.medalharVencedorTorneios();
+                atribuirPremio();
             }
         });
 
-        panelCampeonato.add(btnAtribuirPremio, BorderLayout.SOUTH);
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.setLayout(new FlowLayout());
+        panelBotoes.add(btnExportarRankings);
+        panelBotoes.add(btnAtribuirPremio);
+
+        panelCampeonato.add(panelBotoes, BorderLayout.SOUTH);
 
         frameCampeonato.add(panelCampeonato, BorderLayout.CENTER);
         frameCampeonato.setVisible(true);
+    }
+
+    private void atribuirPremio() {
+        JFrame framePremio = new JFrame("Atribuir Prémio");
+        framePremio.setSize(400, 400);
+        framePremio.setLayout(new BorderLayout());
+
+        JPanel panelPremio = new JPanel();
+        panelPremio.setLayout(new GridLayout(0, 1, 10, 10));
+        panelPremio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        StringBuilder info = new StringBuilder();
+        info.append("Vencedores e Prémios:\n");
+
+        if (vencedorTorneioSingularPontos != null) {
+            Premio premioSingularesPontos = new Premio("Singulares (Pontos)", 30000);
+            info.append("Vencedor do Torneio de Singulares (Pontos): ").append(vencedorTorneioSingularPontos)
+                    .append(" - Prémio: ").append(premioSingularesPontos.getValor()).append("\n");
+        }
+        if (vencedorTorneioSingularEleminatorio != null) {
+            Premio premioSingularesEliminatorias = new Premio("Singulares (Eliminatórias)", 30000);
+            info.append("Vencedor do Torneio de Singulares (Eliminatórias): ")
+                    .append(vencedorTorneioSingularEleminatorio)
+                    .append(" - Prémio: ").append(premioSingularesEliminatorias.getValor()).append("\n");
+        }
+        if (vencedorTorneioDuplasPontos != null) {
+            Premio premioDuplasPontos = new Premio("Duplas (Pontos)", 40000);
+            info.append("Vencedor do Torneio de Duplas (Pontos): ").append(vencedorTorneioDuplasPontos)
+                    .append(" - Prémio: ").append(premioDuplasPontos.getValor()).append("\n");
+        }
+        if (vencedorTorneioDuplasEliminatorio != null) {
+            Premio premioDuplasEliminatorias = new Premio("Duplas (Eliminatórias)", 40000);
+            info.append("Vencedor do Torneio de Duplas (Eliminatórias): ").append(vencedorTorneioDuplasEliminatorio)
+                    .append(" - Prémio: ").append(premioDuplasEliminatorias.getValor()).append("\n");
+        }
+
+        JTextArea textArea = new JTextArea(info.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        panelPremio.add(scrollPane);
+
+        framePremio.add(panelPremio, BorderLayout.CENTER);
+        framePremio.setVisible(true);
     }
 }

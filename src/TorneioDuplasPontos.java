@@ -1,5 +1,3 @@
-package src;
-
 import java.util.ArrayList;
 
 public class TorneioDuplasPontos extends TorneioDuplas {
@@ -19,19 +17,13 @@ public class TorneioDuplasPontos extends TorneioDuplas {
 
         // Calcular os pontos das duplas
         for (PartidaDuplas partida : partidas) {
-            Jogador[] vencedoresPartida = partida.determinarVencedores();
-            int index = -1;
-            for (int i = 0; i < duplas.size(); i++) {
-                if (duplas.get(i)[0].equals(vencedoresPartida[0]) && duplas.get(i)[1].equals(vencedoresPartida[1])) {
-                    index = i;
-                    break;
-                }
-            }
+            Jogador[] vencedores = partida.determinarVencedores();
+            int index = duplas.indexOf(vencedores);
             if (index == -1) {
-                duplas.add(vencedoresPartida);
-                pontos.add(3);
+                duplas.add(vencedores);
+                pontos.add(1);
             } else {
-                pontos.set(index, pontos.get(index) + 3);
+                pontos.set(index, pontos.get(index) + 1);
             }
         }
 
@@ -46,5 +38,25 @@ public class TorneioDuplasPontos extends TorneioDuplas {
         }
 
         return vencedores;
+    }
+
+    public void iniciarTorneio(ArrayList<Jogador[]> duplas) {
+        ArrayList<Jogador[]> participantes = new ArrayList<>(duplas);
+
+        // Garantir que cada dupla jogue 6 jogos
+        for (int i = 0; i < participantes.size(); i++) {
+            for (int j = 0; j < participantes.size(); j++) {
+                if (i != j) {
+                    for (int k = 0; k < 1; k++) {
+                        Jogador[] dupla1 = participantes.get(i);
+                        Jogador[] dupla2 = participantes.get(j);
+                        Arbitro arbitro = Arbitro.getArbitros().get((int) (Math.random() * Arbitro.getArbitros().size()));
+                        PartidaDuplas partida = new PartidaDuplas(dupla1, dupla2, arbitro);
+                        adicionarPartida(partida);
+                        partida.determinarVencedores();
+                    }
+                }
+            }
+        }
     }
 }
