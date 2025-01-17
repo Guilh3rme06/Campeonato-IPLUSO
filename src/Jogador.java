@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 
 /**
@@ -55,14 +57,25 @@ public class Jogador extends Pessoa {
         this.partidasJogadas = partidasJogadas;
     }
 
+    /**
+     * Adiciona um jogador à lista de jogadores.
+     * @param jogador Jogador a ser adicionado.
+     */
     public static void adicionarJogador(Jogador jogador){
         jogadores.add(jogador);
     }
 
+    /**
+     * Obtém a lista de jogadores.
+     * @return Lista de jogadores.
+     */
     public static ArrayList<Jogador> getJogadores(){
         return jogadores;
     }
-
+    
+    /**
+     * Exibe a lista de jogadores.
+     */
     public static void exibirJogador(){
         for (Jogador jogador : jogadores) {
             System.out.println(jogador);

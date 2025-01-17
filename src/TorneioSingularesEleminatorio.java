@@ -1,10 +1,22 @@
+package src;
+
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um torneio de singulares por eliminação.
+ */
 public class TorneioSingularesEleminatorio extends TorneioSingulares {
+    /**
+     * Construtor para inicializar um torneio de singulares por eliminação.
+     */
     public TorneioSingularesEleminatorio() {
         super();
     }
 
+    /**
+     * Determina o vencedor do torneio de singulares por eliminação.
+     * @return Vencedor do torneio.
+     */
     @Override
     public Jogador determinarVencedorTorneioSingulares() {
         if (partidas.isEmpty()) {
@@ -34,7 +46,11 @@ public class TorneioSingularesEleminatorio extends TorneioSingulares {
 
         return vencedores.get(0);
     }
- 
+
+    /**
+     * Inicia o torneio de singulares com uma lista de jogadores.
+     * @param jogadores Lista de jogadores participantes.
+     */
     public void iniciarTorneio(ArrayList<Jogador> jogadores) {
         ArrayList<Jogador> participantes = new ArrayList<>(jogadores);
 
