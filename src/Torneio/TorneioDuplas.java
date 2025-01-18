@@ -1,6 +1,9 @@
-package src;
+
 
 import java.util.ArrayList;
+
+import Participantes.Jogador;
+import Partidas.PartidaDuplas;
 
 /**
  * Classe abstrata que representa um torneio de duplas.

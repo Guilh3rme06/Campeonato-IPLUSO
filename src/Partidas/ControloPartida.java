@@ -1,5 +1,6 @@
-package src;
+package Partidas;
 
+import Participantes.*;
 /**
  * Interface que define o controle de uma partida.
  */

@@ -1,5 +1,3 @@
-package src;
-
 /**
  * Classe principal do aplicativo.
  */

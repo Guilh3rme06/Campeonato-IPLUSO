@@ -1,4 +1,4 @@
-package src;
+
 
 /**
  * Classe que representa um prêmio no campeonato.

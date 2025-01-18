@@ -1,6 +1,9 @@
-package src;
+
 
 import java.util.ArrayList;
+
+import Participantes.Jogador;
+import Partidas.PartidaSingulares;
 
 /**
  * Classe que representa um torneio de singulares por pontos.

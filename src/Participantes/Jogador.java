@@ -1,4 +1,4 @@
-package src;
+package Participantes;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,8 @@
-package src;
+package Partidas;
 
 import java.util.Random;
+
+import Participantes.*;
 
 /**
  * Classe que representa uma partida de duplas.

@@ -1,7 +1,10 @@
-package src;
-
 import javax.swing.*;
 import javax.swing.text.*;
+
+import Participantes.Arbitro;
+import Participantes.Jogador;
+import Partidas.PartidaSingulares;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

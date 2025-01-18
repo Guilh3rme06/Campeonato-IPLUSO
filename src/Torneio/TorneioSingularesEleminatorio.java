@@ -1,6 +1,7 @@
-package src;
-
 import java.util.ArrayList;
+import Participantes.Arbitro;
+import Participantes.Jogador;
+import Partidas.PartidaSingulares;
 
 /**
  * Classe que representa um torneio de singulares por eliminação.

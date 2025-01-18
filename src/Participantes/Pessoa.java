@@ -1,4 +1,4 @@
-package src;
+package Participantes;
 
 /**
  * Classe abstrata que representa uma pessoa no campeonato.

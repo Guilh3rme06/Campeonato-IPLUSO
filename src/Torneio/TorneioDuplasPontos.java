@@ -1,6 +1,7 @@
-package src;
-
 import java.util.ArrayList;
+import Participantes.Arbitro;
+import Participantes.Jogador;
+import Partidas.PartidaDuplas;
 
 /**
  * Classe que representa um torneio de duplas no formato de pontos.
