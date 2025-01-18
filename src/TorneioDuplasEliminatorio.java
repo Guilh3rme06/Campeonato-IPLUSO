@@ -1,13 +1,28 @@
+package src;
+
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um torneio de duplas no formato eliminatório.
+ */
 public class TorneioDuplasEliminatorio extends TorneioDuplas {
     private ArrayList<Arbitro> arbitros;
 
+    /**
+     * Construtor para inicializar um torneio de duplas eliminatório.
+     *
+     * @param arbitros Lista de árbitros disponíveis para o torneio.
+     */
     public TorneioDuplasEliminatorio(ArrayList<Arbitro> arbitros) {
         super();
         this.arbitros = arbitros;
     }
 
+    /**
+     * Determina os vencedores do torneio de duplas eliminatório.
+     *
+     * @return Array de jogadores vencedores do torneio de duplas.
+     */
     @Override
     public Jogador[] determinarVencedorTorneioDuplas() {
         if (partidas.isEmpty()) {
@@ -39,6 +54,11 @@ public class TorneioDuplasEliminatorio extends TorneioDuplas {
         return vencedores.get(0);
     }
 
+    /**
+     * Inicia o torneio de duplas com as duplas fornecidas.
+     *
+     * @param duplas Lista de duplas participantes do torneio.
+     */
     public void iniciarTorneio(ArrayList<Jogador[]> duplas) {
         ArrayList<Jogador[]> participantes = new ArrayList<>(duplas);
 

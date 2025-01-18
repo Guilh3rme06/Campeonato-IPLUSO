@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -18,11 +20,17 @@ public class GUI {
     private String vencedorTorneioDuplasEliminatorio;
     private String vencedorTorneioDuplasPontos;
 
+    /**
+     * Construtor que inicializa a interface gráfica do sistema.
+     */
     public GUI() {
         campeonato = new Campeonato();
         criarInterface();
     }
 
+    /**
+     * Cria a interface gráfica do sistema.
+     */
     private void criarInterface() {
         JFrame frame = new JFrame("Campeonato de Xadrez - IPLUSO");
         frame.setSize(800, 600);
@@ -87,13 +95,16 @@ public class GUI {
         frame.setVisible(true);
     }
 
+    /**
+     * Abre a janela para registar um novo jogador.
+     */
     private void registarJogador() {
         JFrame frameJogador = new JFrame("Registar Jogador");
         frameJogador.setSize(400, 300);
         frameJogador.setLayout(new BorderLayout());
 
         JPanel panelJogador = new JPanel();
-        panelJogador.setLayout(new GridLayout(6, 2, 10, 10)); // Alterado para 8 linhas
+        panelJogador.setLayout(new GridLayout(6, 2, 10, 10));
         panelJogador.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JTextField txtNome = new JTextField();
@@ -148,6 +159,7 @@ public class GUI {
                 }
             }
         });
+
         // Configurar campos de rankings e partidas jogadas como não editáveis
         txtRankings.setEditable(false);
         txtPartidasJogadas.setEditable(false);
@@ -187,6 +199,9 @@ public class GUI {
         frameJogador.setVisible(true);
     }
 
+    /**
+     * Abre a janela para registar um novo árbitro.
+     */
     private void registarArbitro() {
         JFrame frameArbitro = new JFrame("Registar Árbitro");
         frameArbitro.setSize(400, 300);
@@ -294,6 +309,9 @@ public class GUI {
         frameArbitro.setVisible(true);
     }
 
+    /**
+     * Abre a janela para gerar um novo torneio.
+     */
     private void gerarTorneio() {
         JFrame frameTorneio = new JFrame("Gerar Torneio");
         frameTorneio.setSize(700, 600);
@@ -432,6 +450,12 @@ public class GUI {
         frameTorneio.setVisible(true);
     }
 
+    /**
+     * Atualiza a lista de jogadores disponíveis com base no gênero selecionado.
+     *
+     * @param cbGenero    JComboBox contendo as opções de gênero.
+     * @param cbJogadores JComboBox onde os nomes dos jogadores serão adicionados.
+     */
     private void updateJogadores(JComboBox<String> cbGenero, JComboBox<String> cbJogadores) {
         cbJogadores.removeAllItems();
         String generoSelecionado = cbGenero != null ? (String) cbGenero.getSelectedItem() : null;
@@ -447,6 +471,15 @@ public class GUI {
         }
     }
 
+    /**
+     * Cria um torneio de singulares com base nos parâmetros fornecidos.
+     *
+     * @param genero                Gênero dos jogadores.
+     * @param numEquipas            Número de equipas.
+     * @param tipoCompeticao        Tipo de competição (Eliminatórias ou Pontos).
+     * @param jogadoresSelecionados Lista de jogadores selecionados.
+     * @param arbitroResponsavel    Nome do árbitro responsável.
+     */
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao,
             ArrayList<String> jogadoresSelecionados, String arbitroResponsavel) {
         System.out.println("A criar um torneio de singulares " + genero + " com " + numEquipas + " equipas.");
@@ -521,6 +554,14 @@ public class GUI {
         resultadosTorneioSingulares = resultados.toString();
     }
 
+    /**
+     * Cria um torneio de duplas com base nos parâmetros fornecidos.
+     *
+     * @param numEquipas            Número de equipas.
+     * @param tipoCompeticao        Tipo de competição (Eliminatórias ou Pontos).
+     * @param jogadoresSelecionados Lista de jogadores selecionados.
+     * @param arbitroResponsavel    Nome do árbitro responsável.
+     */
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados,
             String arbitroResponsavel) {
         System.out.println("A criar um torneio de duplas misto com " + numEquipas + " equipas.");
@@ -570,6 +611,9 @@ public class GUI {
         campeonato.adicionarTorneioDuplas(torneioDuplas);
     }
 
+    /**
+     * Exibe a interface gráfica para visualizar o estado do campeonato.
+     */
     private void visualizarCampeonato() {
         JFrame frameCampeonato = new JFrame("Visualizar Campeonato");
         frameCampeonato.setSize(800, 600);
@@ -689,6 +733,9 @@ public class GUI {
         frameCampeonato.setVisible(true);
     }
 
+    /**
+     * Exibe a interface gráfica para atribuir prêmios aos vencedores dos torneios.
+     */
     private void atribuirPremio() {
         JFrame framePremio = new JFrame("Atribuir Prémio");
         framePremio.setSize(400, 400);

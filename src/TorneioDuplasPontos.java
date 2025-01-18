@@ -1,10 +1,24 @@
+package src;
+
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um torneio de duplas no formato de pontos.
+ */
 public class TorneioDuplasPontos extends TorneioDuplas {
+
+    /**
+     * Construtor para inicializar um torneio de duplas no formato de pontos.
+     */
     public TorneioDuplasPontos() {
         super();
     }
 
+    /**
+     * Determina os vencedores do torneio de duplas no formato de pontos.
+     *
+     * @return Array de jogadores vencedores do torneio de duplas.
+     */
     @Override
     public Jogador[] determinarVencedorTorneioDuplas() {
         if (partidas.isEmpty()) {
@@ -40,6 +54,11 @@ public class TorneioDuplasPontos extends TorneioDuplas {
         return vencedores;
     }
 
+    /**
+     * Inicia o torneio de duplas com as duplas fornecidas.
+     *
+     * @param duplas Lista de duplas participantes do torneio.
+     */
     public void iniciarTorneio(ArrayList<Jogador[]> duplas) {
         ArrayList<Jogador[]> participantes = new ArrayList<>(duplas);
 

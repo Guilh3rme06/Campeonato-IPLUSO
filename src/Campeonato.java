@@ -1,33 +1,60 @@
+package src;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * Classe que representa um campeonato.
+ */
 public class Campeonato {
     private TorneioDuplas torneioDuplas;
     private TorneioSingulares torneioSingulares;
 
+    /**
+     * Construtor para inicializar um campeonato.
+     */
     public Campeonato() {
         this.torneioDuplas = new TorneioDuplasEliminatorio(new ArrayList<>());
         this.torneioSingulares = new TorneioSingularesEleminatorio();
     }
 
+    /**
+     * Adiciona um torneio de singulares ao campeonato.
+     * @param torneio Torneio de singulares a ser adicionado.
+     */
     public void adicionarTorneioSingulares(TorneioSingulares torneio) {
         this.torneioSingulares = torneio;
     }
 
+    /**
+     * Adiciona um torneio de duplas ao campeonato.
+     * @param torneio Torneio de duplas a ser adicionado.
+     */
     public void adicionarTorneioDuplas(TorneioDuplas torneio) {
         this.torneioDuplas = torneio;
     }
 
+    /**
+     * Obtém o torneio de singulares do campeonato.
+     * @return Torneio de singulares.
+     */
     public TorneioSingulares getTorneioSingulares() {
         return torneioSingulares;
     }
 
+    /**
+     * Obtém o torneio de duplas do campeonato.
+     * @return Torneio de duplas.
+     */
     public TorneioDuplas getTorneioDuplas() {
         return torneioDuplas;
     }
-
+    
+    /**
+     * Medalha os vencedores dos torneios de singulares e duplas.
+     */
     public void medalharVencedorTorneios() {
         Jogador vencedorSingulares = torneioSingulares.determinarVencedorTorneioSingulares();
         Jogador[] vencedoresDuplas = torneioDuplas.determinarVencedorTorneioDuplas();
@@ -46,6 +73,10 @@ public class Campeonato {
         }
     }
 
+    /**
+     * Exporta os rankings dos jogadores para um ficheiro.
+     * @param nomeFicheiro Nome do ficheiro para exportar os rankings.
+     */
     public static void exportarRankingsParaFicheiro(String nomeFicheiro) {
         ArrayList<Jogador> jogadores = Jogador.getJogadores();
 
