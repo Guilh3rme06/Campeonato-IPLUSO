@@ -18,7 +18,7 @@ public interface ControloPartida {
     Jogador determinarVencedor();
 
     /**
-     * Obtém o tempo da partida.
+     * Obtem o tempo da partida.
      * @return Tempo da partida.
      */
     double tempoPartida();

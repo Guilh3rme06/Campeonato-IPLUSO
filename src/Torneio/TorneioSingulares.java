@@ -24,7 +24,7 @@ public abstract class TorneioSingulares {
     }
 
     /**
-     * Obtém a lista de partidas do torneio.
+     * Obtem a lista de partidas do torneio.
      * @return Lista de partidas.
      */
     public ArrayList<PartidaSingulares> getPartidas() {

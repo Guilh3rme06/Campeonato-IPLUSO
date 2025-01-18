@@ -15,9 +15,9 @@ public class Jogador extends Pessoa {
      * Construtor da classe Jogador.
      * @param nome Nome do jogador.
      * @param idade Idade do jogador.
-     * @param genero Gênero do jogador.
+     * @param genero Genero do jogador.
      * @param rankings Ranking do jogador.
-     * @param partidasJogadas Número de partidas jogadas pelo jogador.
+     * @param partidasJogadas Numero de partidas jogadas pelo jogador.
      */
     public Jogador(String nome, int idade, char genero, int rankings, int partidasJogadas) {
         super(nome, idade, genero);
@@ -26,7 +26,7 @@ public class Jogador extends Pessoa {
     }
 
     /**
-     * Obtém o ranking do jogador.
+     * Obtem o ranking do jogador.
      * @return Ranking do jogador.
      */
     public int getRankings() {
@@ -42,23 +42,23 @@ public class Jogador extends Pessoa {
     }
 
     /**
-     * Obtém o número de partidas jogadas pelo jogador.
-     * @return Número de partidas jogadas pelo jogador.
+     * Obtem o numero de partidas jogadas pelo jogador.
+     * @return Numero de partidas jogadas pelo jogador.
      */
     public int getPartidasJogadas() {
         return partidasJogadas;
     }
 
     /**
-     * Define o número de partidas jogadas pelo jogador.
-     * @param partidasJogadas Número de partidas jogadas pelo jogador.
+     * Define o numero de partidas jogadas pelo jogador.
+     * @param partidasJogadas Numero de partidas jogadas pelo jogador.
      */
     public void setPartidasJogadas(int partidasJogadas) {
         this.partidasJogadas = partidasJogadas;
     }
 
     /**
-     * Adiciona um jogador à lista de jogadores.
+     * Adiciona um jogador a lista de jogadores.
      * @param jogador Jogador a ser adicionado.
      */
     public static void adicionarJogador(Jogador jogador){
@@ -87,7 +87,7 @@ public class Jogador extends Pessoa {
         return "Jogador: " +
                 "Nome = " + getNome() +
                 ", Idade = " + getIdade() +
-                ", Género = " + getGenero() +
+                ", Genero = " + getGenero() +
                 ", Rankings = " + rankings +
                 ", Partidas Jogadas = " + partidasJogadas;
     }

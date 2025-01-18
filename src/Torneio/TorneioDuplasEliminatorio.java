@@ -15,7 +15,7 @@ public class TorneioDuplasEliminatorio extends TorneioDuplas {
     /**
      * Construtor para inicializar um torneio de duplas eliminatório.
      *
-     * @param arbitros Lista de árbitros disponíveis para o torneio.
+     * @param arbitros Lista de arbitros disponíveis para o torneio.
      */
     public TorneioDuplasEliminatorio(ArrayList<Arbitro> arbitros) {
         super();

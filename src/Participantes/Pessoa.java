@@ -12,7 +12,7 @@ public abstract class Pessoa {
      * Construtor da classe Pessoa.
      * @param nome Nome da pessoa.
      * @param idade Idade da pessoa.
-     * @param genero Gênero da pessoa.
+     * @param genero Genero da pessoa.
      */
     public Pessoa(String nome, int idade, char genero) {
         this.nome = nome;
@@ -21,7 +21,7 @@ public abstract class Pessoa {
     }
 
     /**
-     * Obtém o nome da pessoa.
+     * Obtem o nome da pessoa.
      * @return Nome da pessoa.
      */
     public String getNome() {
@@ -37,7 +37,7 @@ public abstract class Pessoa {
     }
 
     /**
-     * Obtém a idade da pessoa.
+     * Obtem a idade da pessoa.
      * @return Idade da pessoa.
      */
     public int getIdade() {
@@ -53,16 +53,16 @@ public abstract class Pessoa {
     }
 
     /**
-     * Obtém o gênero da pessoa.
-     * @return Gênero da pessoa.
+     * Obtem o genero da pessoa.
+     * @return Genero da pessoa.
      */
     public char getGenero() {
         return genero;
     }
 
     /**
-     * Define o gênero da pessoa.
-     * @param genero Gênero da pessoa.
+     * Define o genero da pessoa.
+     * @param genero Genero da pessoa.
      */
     public void setGenero(char genero) {
         this.genero = genero;

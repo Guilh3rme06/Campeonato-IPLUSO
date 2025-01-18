@@ -37,7 +37,7 @@ public class Campeonato {
     }
 
     /**
-     * Obtém o torneio de singulares do campeonato.
+     * Obtem o torneio de singulares do campeonato.
      * @return Torneio de singulares.
      */
     public TorneioSingulares getTorneioSingulares() {
@@ -45,7 +45,7 @@ public class Campeonato {
     }
 
     /**
-     * Obtém o torneio de duplas do campeonato.
+     * Obtem o torneio de duplas do campeonato.
      * @return Torneio de duplas.
      */
     public TorneioDuplas getTorneioDuplas() {
@@ -62,14 +62,14 @@ public class Campeonato {
         if (vencedorSingulares != null) {
             Premio premioSingulares = new Premio("Singulares", 30000);
             System.out.println("Medalha de ouro para o vencedor do torneio de singulares: " + vencedorSingulares.getNome()
-                + " - Prémio: " + premioSingulares.getValor());
+                + " - Premio: " + premioSingulares.getValor());
         }
 
         if (vencedoresDuplas != null && vencedoresDuplas.length == 2) {
             Premio premioDuplas = new Premio("Duplas", 40000);
             System.out.println("Medalha de ouro para os vencedores do torneio de duplas: "
                 + vencedoresDuplas[0].getNome() + " e " + vencedoresDuplas[1].getNome()
-                + " - Prémio: " + premioDuplas.getValor());
+                + " - Premio: " + premioDuplas.getValor());
         }
     }
 

@@ -28,7 +28,7 @@ public abstract class TorneioDuplas {
     }
 
     /**
-     * Obtém a lista de partidas do torneio de duplas.
+     * Obtem a lista de partidas do torneio de duplas.
      *
      * @return Lista de partidas do torneio de duplas.
      */

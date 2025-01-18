@@ -18,7 +18,7 @@ public class Premio {
     }
 
     /**
-     * Obtém o tipo do prêmio.
+     * Obtem o tipo do prêmio.
      * @return Tipo do prêmio.
      */
     public String getTipo() {
@@ -34,7 +34,7 @@ public class Premio {
     }
 
     /**
-     * Obtém o valor do prêmio.
+     * Obtem o valor do prêmio.
      * @return Valor do prêmio.
      */
     public double getValor() {

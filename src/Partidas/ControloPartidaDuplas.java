@@ -18,7 +18,7 @@ public interface ControloPartidaDuplas {
     Jogador[] determinarVencedores();
 
     /**
-     * Obtém o tempo da partida de duplas.
+     * Obtem o tempo da partida de duplas.
      * @return Tempo da partida.
      */
     double tempoPartida();

@@ -15,7 +15,7 @@ public class PartidaSingulares implements ControloPartida {
      * Construtor para inicializar uma partida de singulares.
      * @param jogador1 Primeiro jogador.
      * @param jogador2 Segundo jogador.
-     * @param arbitro Árbitro da partida.
+     * @param arbitro arbitro da partida.
      */
     public PartidaSingulares(Jogador jogador1, Jogador jogador2, Arbitro arbitro) {
         this.jogador1 = jogador1;
@@ -24,7 +24,7 @@ public class PartidaSingulares implements ControloPartida {
     }
 
     /**
-     * Obtém o primeiro jogador.
+     * Obtem o primeiro jogador.
      * @return Primeiro jogador.
      */
     public Jogador getJogador1() {
@@ -32,7 +32,7 @@ public class PartidaSingulares implements ControloPartida {
     }
 
     /**
-     * Obtém o segundo jogador.
+     * Obtem o segundo jogador.
      * @return Segundo jogador.
      */
     public Jogador getJogador2() {
@@ -40,8 +40,8 @@ public class PartidaSingulares implements ControloPartida {
     }
 
     /**
-     * Obtém o árbitro da partida.
-     * @return Árbitro da partida.
+     * Obtem o arbitro da partida.
+     * @return arbitro da partida.
      */
     public Arbitro getArbitro() {
         return arbitro;
@@ -69,18 +69,18 @@ public class PartidaSingulares implements ControloPartida {
         int vencedor = vencedorPartidaSingular.nextInt(2);
 
         if (vencedor == 0) {
-            System.out.println("O vencedor da Partida Singular é: " + this.jogador1.getNome());
+            System.out.println("O vencedor da Partida Singular e: " + this.jogador1.getNome());
             this.jogador1.setRankings(jogador1.getRankings() + 5);
             return this.jogador1;
         } else {
-            System.out.println("O vencedor da Partida Singular é: " + this.jogador2.getNome());
+            System.out.println("O vencedor da Partida Singular e: " + this.jogador2.getNome());
             this.jogador2.setRankings(jogador2.getRankings() + 5);
             return this.jogador2;
         }
     }
 
     /**
-     * Obtém o tempo da partida.
+     * Obtem o tempo da partida.
      * @return Tempo da partida.
      */
     @Override

@@ -3,7 +3,7 @@ package Participantes;
 import java.util.ArrayList;
 
 /**
- * Classe que representa um árbitro.
+ * Classe que representa um arbitro.
  */
 public class Arbitro extends Pessoa {
     private String certificacoes;
@@ -16,24 +16,24 @@ public class Arbitro extends Pessoa {
     }
 
     /**
-     * Define as certificações do árbitro.
-     * @param certificacoes Certificações do árbitro.
+     * Define as certificações do arbitro.
+     * @param certificacoes Certificacoes do arbitro.
      */
     public void setCertificacoes(String certificacoes) {
         this.certificacoes = certificacoes;
     }
 
     /**
-     * Adiciona um árbitro à lista de árbitros.
-     * @param arbitro Árbitro a ser adicionado.
+     * Adiciona um arbitro a lista de arbitros.
+     * @param arbitro arbitro a ser adicionado.
      */
     public static void adicionarArbitro(Arbitro arbitro) {
         arbitros.add(arbitro);
     }
 
     /**
-     * Obtém a lista de árbitros.
-     * @return Lista de árbitros.
+     * Obtem a lista de arbitros.
+     * @return Lista de arbitros.
      */
     public static ArrayList<Arbitro> getArbitros() {
         return arbitros;

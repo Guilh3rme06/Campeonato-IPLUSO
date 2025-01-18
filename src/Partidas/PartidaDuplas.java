@@ -18,7 +18,7 @@ public class PartidaDuplas implements ControloPartidaDuplas {
      *
      * @param dupla1 Array de jogadores da primeira dupla.
      * @param dupla2 Array de jogadores da segunda dupla.
-     * @param arbitro Árbitro responsável pela partida.
+     * @param arbitro Arbitro responsavel pela partida.
      */
     public PartidaDuplas(Jogador[] dupla1, Jogador[] dupla2, Arbitro arbitro) {
         this.dupla1 = dupla1;
@@ -27,7 +27,7 @@ public class PartidaDuplas implements ControloPartidaDuplas {
     }
 
     /**
-     * Obtém a primeira dupla de jogadores.
+     * Obtem a primeira dupla de jogadores.
      *
      * @return Array de jogadores da primeira dupla.
      */
@@ -36,7 +36,7 @@ public class PartidaDuplas implements ControloPartidaDuplas {
     }
 
     /**
-     * Obtém a segunda dupla de jogadores.
+     * Obtem a segunda dupla de jogadores.
      *
      * @return Array de jogadores da segunda dupla.
      */
@@ -45,16 +45,16 @@ public class PartidaDuplas implements ControloPartidaDuplas {
     }
 
     /**
-     * Obtém o árbitro responsável pela partida.
+     * Obtem o arbitro responsavel pela partida.
      *
-     * @return Árbitro da partida.
+     * @return Arbitro da partida.
      */
     public Arbitro getArbitro() {
         return arbitro;
     }
 
     /**
-     * Obtém o resultado da partida.
+     * Obtem o resultado da partida.
      *
      * @return Resultado da partida.
      */
@@ -90,13 +90,13 @@ public class PartidaDuplas implements ControloPartidaDuplas {
         int vencedor = vencedorPartidaDuplas.nextInt(2);
 
         if (vencedor == 0) {
-            System.out.println("Os vencedores da Partida Duplas são: " + dupla1[0].getNome() + " e " + dupla1[1].getNome());
+            System.out.println("Os vencedores da Partida Duplas sãa: " + dupla1[0].getNome() + " e " + dupla1[1].getNome());
             for (Jogador jogador : dupla1) {
                 jogador.setRankings(jogador.getRankings() + 5);
             }
             return dupla1;
         } else {
-            System.out.println("Os vencedores da Partida Duplas são: " + dupla2[0].getNome() + " e " + dupla2[1].getNome());
+            System.out.println("Os vencedores da Partida Duplas sao: " + dupla2[0].getNome() + " e " + dupla2[1].getNome());
             for (Jogador jogador : dupla2) {
                 jogador.setRankings(jogador.getRankings() + 5);
             }
@@ -105,7 +105,7 @@ public class PartidaDuplas implements ControloPartidaDuplas {
     }
 
     /**
-     * Obtém o tempo da partida de duplas.
+     * Obtem o tempo da partida de duplas.
      *
      * @return Tempo da partida em minutos.
      */

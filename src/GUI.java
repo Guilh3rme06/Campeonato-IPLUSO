@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Classe que representa a interface gráfica do sistema.
+ * Classe que representa a interface grafica do sistema.
  */
 public class GUI {
     private Campeonato campeonato;
@@ -24,7 +24,7 @@ public class GUI {
     private String vencedorTorneioDuplasPontos;
 
     /**
-     * Construtor que inicializa a interface gráfica do sistema.
+     * Construtor que inicializa a interface grafica do sistema.
      */
     public GUI() {
         campeonato = new Campeonato();
@@ -32,7 +32,7 @@ public class GUI {
     }
 
     /**
-     * Cria a interface gráfica do sistema.
+     * Cria a interface grafica do sistema.
      */
     private void criarInterface() {
         JFrame frame = new JFrame("Campeonato de Xadrez - IPLUSO");
@@ -53,7 +53,7 @@ public class GUI {
 
         // Botões
         JButton btnRegistarJogador = new JButton("Registar Jogador");
-        JButton btnRegistarArbitro = new JButton("Registar Árbitro");
+        JButton btnRegistarArbitro = new JButton("Registar Arbitro");
         JButton btnGerarTorneio = new JButton("Gerar/Controlar Torneios");
         JButton btnVisualizarCampeonato = new JButton("Visualizar Campeonato");
 
@@ -163,7 +163,7 @@ public class GUI {
             }
         });
 
-        // Configurar campos de rankings e partidas jogadas como não editáveis
+        // Configurar campos de rankings e partidas jogadas como não editaveis
         txtRankings.setEditable(false);
         txtPartidasJogadas.setEditable(false);
 
@@ -171,7 +171,7 @@ public class GUI {
         panelJogador.add(txtNome);
         panelJogador.add(new JLabel("Idade:"));
         panelJogador.add(txtIdade);
-        panelJogador.add(new JLabel("Género:"));
+        panelJogador.add(new JLabel("Genero:"));
         panelJogador.add(txtGenero);
         panelJogador.add(new JLabel("Rankings:"));
         panelJogador.add(txtRankings);
@@ -203,10 +203,10 @@ public class GUI {
     }
 
     /**
-     * Abre a janela para registar um novo árbitro.
+     * Abre a janela para registar um novo arbitro.
      */
     private void registarArbitro() {
-        JFrame frameArbitro = new JFrame("Registar Árbitro");
+        JFrame frameArbitro = new JFrame("Registar Arbitro");
         frameArbitro.setSize(400, 300);
         frameArbitro.setLayout(new BorderLayout());
 
@@ -284,7 +284,7 @@ public class GUI {
         panelArbitro.add(txtNome);
         panelArbitro.add(new JLabel("Idade:"));
         panelArbitro.add(txtIdade);
-        panelArbitro.add(new JLabel("Género:"));
+        panelArbitro.add(new JLabel("Genero:"));
         panelArbitro.add(txtGenero);
         panelArbitro.add(new JLabel("Certificações:"));
         panelArbitro.add(txtCertificacoes);
@@ -363,7 +363,7 @@ public class GUI {
                     jogadoresSelecionados.add(jogadorSelecionado);
                     textAreaJogadoresSelecionados.append(jogadorSelecionado + "\n");
                 } else {
-                    JOptionPane.showMessageDialog(frameTorneio, "Número máximo de jogadores atingido.", "Erro",
+                    JOptionPane.showMessageDialog(frameTorneio, "Número maximo de jogadores atingido.", "Erro",
                             JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -389,8 +389,8 @@ public class GUI {
             }
         });
 
-        // Adicionar JComboBox para selecionar o árbitro responsável
-        JLabel lblArbitro = new JLabel("Árbitro Responsável:");
+        // Adicionar JComboBox para selecionar o arbitro responsavel
+        JLabel lblArbitro = new JLabel("Arbitro Responsavel:");
         JComboBox<String> cbArbitros = new JComboBox<>();
         for (Arbitro arbitro : Arbitro.getArbitros()) {
             cbArbitros.addItem(arbitro.getNome());
@@ -408,7 +408,7 @@ public class GUI {
                 String arbitroResponsavel = (String) cbArbitros.getSelectedItem();
 
                 if (arbitroResponsavel == null || arbitroResponsavel.isEmpty()) {
-                    JOptionPane.showMessageDialog(frameTorneio, "Por favor, selecione um árbitro responsável.", "Erro",
+                    JOptionPane.showMessageDialog(frameTorneio, "Por favor, selecione um arbitro responsavel.", "Erro",
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -481,14 +481,14 @@ public class GUI {
      * @param numEquipas            Número de equipas.
      * @param tipoCompeticao        Tipo de competição (Eliminatórias ou Pontos).
      * @param jogadoresSelecionados Lista de jogadores selecionados.
-     * @param arbitroResponsavel    Nome do árbitro responsável.
+     * @param arbitroResponsavel    Nome do arbitro responsavel.
      */
     private void criarTorneioSingulares(String genero, int numEquipas, String tipoCompeticao,
             ArrayList<String> jogadoresSelecionados, String arbitroResponsavel) {
         System.out.println("A criar um torneio de singulares " + genero + " com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
-        System.out.println("Árbitro responsável: " + arbitroResponsavel);
+        System.out.println("arbitro responsavel: " + arbitroResponsavel);
 
         TorneioSingulares torneioSingulares;
         if (tipoCompeticao.equals("Eliminatórias")) {
@@ -521,7 +521,7 @@ public class GUI {
                         Jogador vencedorPartida = partida.determinarVencedor();
                         vencedoresRodada.add(vencedorPartida);
                         ultimoVencedor = vencedorPartida;
-                        resultados.append("O vencedor da Partida Singular é: ").append(vencedorPartida.getNome())
+                        resultados.append("O vencedor da Partida Singular e: ").append(vencedorPartida.getNome())
                                 .append("\n");
                     }
                 }
@@ -530,7 +530,7 @@ public class GUI {
             // Determinar vencedor do torneio
             if (ultimoVencedor != null) {
                 vencedorTorneioSingularEleminatorio = ultimoVencedor.getNome();
-                resultados.append("O vencedor do Torneio de Singulares é: ").append(ultimoVencedor.getNome())
+                resultados.append("O vencedor do Torneio de Singulares e: ").append(ultimoVencedor.getNome())
                         .append("\n");
             }
         } else {
@@ -540,7 +540,7 @@ public class GUI {
                     torneioSingulares.adicionarPartida(partida);
                     // Determinar vencedor da partida
                     Jogador vencedorPartida = partida.determinarVencedor();
-                    resultados.append("O vencedor da Partida Singular é: ").append(vencedorPartida.getNome())
+                    resultados.append("O vencedor da Partida Singular e: ").append(vencedorPartida.getNome())
                             .append("\n");
                 }
             }
@@ -548,7 +548,7 @@ public class GUI {
             Jogador vencedorTorneio = torneioSingulares.determinarVencedorTorneioSingulares();
             if (vencedorTorneio != null) {
                 vencedorTorneioSingularPontos = vencedorTorneio.getNome();
-                resultados.append("O vencedor do Torneio de Singulares é: ").append(vencedorTorneio.getNome())
+                resultados.append("O vencedor do Torneio de Singulares e: ").append(vencedorTorneio.getNome())
                         .append("\n");
             }
         }
@@ -563,14 +563,14 @@ public class GUI {
      * @param numEquipas            Número de equipas.
      * @param tipoCompeticao        Tipo de competição (Eliminatórias ou Pontos).
      * @param jogadoresSelecionados Lista de jogadores selecionados.
-     * @param arbitroResponsavel    Nome do árbitro responsável.
+     * @param arbitroResponsavel    Nome do arbitro responsavel.
      */
     private void criarTorneioDuplas(int numEquipas, String tipoCompeticao, ArrayList<String> jogadoresSelecionados,
             String arbitroResponsavel) {
         System.out.println("A criar um torneio de duplas misto com " + numEquipas + " equipas.");
         System.out.println("Tipo de competição: " + tipoCompeticao);
         System.out.println("Jogadores selecionados: " + jogadoresSelecionados);
-        System.out.println("Árbitro responsável: " + arbitroResponsavel);
+        System.out.println("arbitro responsavel: " + arbitroResponsavel);
 
         TorneioDuplas torneioDuplas;
         if (tipoCompeticao.equals("Eliminatórias")) {
@@ -615,7 +615,7 @@ public class GUI {
     }
 
     /**
-     * Exibe a interface gráfica para visualizar o estado do campeonato.
+     * Exibe a interface grafica para visualizar o estado do campeonato.
      */
     private void visualizarCampeonato() {
         JFrame frameCampeonato = new JFrame("Visualizar Campeonato");
@@ -717,7 +717,7 @@ public class GUI {
         });
 
         // Botão para atribuir prêmio
-        JButton btnAtribuirPremio = new JButton("Atribuir Prémio");
+        JButton btnAtribuirPremio = new JButton("Atribuir Premio");
         btnAtribuirPremio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -737,10 +737,10 @@ public class GUI {
     }
 
     /**
-     * Exibe a interface gráfica para atribuir prêmios aos vencedores dos torneios.
+     * Exibe a interface grafica para atribuir prêmios aos vencedores dos torneios.
      */
     private void atribuirPremio() {
-        JFrame framePremio = new JFrame("Atribuir Prémio");
+        JFrame framePremio = new JFrame("Atribuir Premio");
         framePremio.setSize(400, 400);
         framePremio.setLayout(new BorderLayout());
 
@@ -749,28 +749,28 @@ public class GUI {
         panelPremio.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         StringBuilder info = new StringBuilder();
-        info.append("Vencedores e Prémios:\n");
+        info.append("Vencedores e Premios:\n");
 
         if (vencedorTorneioSingularPontos != null) {
             Premio premioSingularesPontos = new Premio("Singulares (Pontos)", 30000);
             info.append("Vencedor do Torneio de Singulares (Pontos): ").append(vencedorTorneioSingularPontos)
-                    .append(" - Prémio: ").append(premioSingularesPontos.getValor()).append("\n");
+                    .append(" - Premio: ").append(premioSingularesPontos.getValor()).append("\n");
         }
         if (vencedorTorneioSingularEleminatorio != null) {
             Premio premioSingularesEliminatorias = new Premio("Singulares (Eliminatórias)", 30000);
             info.append("Vencedor do Torneio de Singulares (Eliminatórias): ")
                     .append(vencedorTorneioSingularEleminatorio)
-                    .append(" - Prémio: ").append(premioSingularesEliminatorias.getValor()).append("\n");
+                    .append(" - Premio: ").append(premioSingularesEliminatorias.getValor()).append("\n");
         }
         if (vencedorTorneioDuplasPontos != null) {
             Premio premioDuplasPontos = new Premio("Duplas (Pontos)", 40000);
             info.append("Vencedor do Torneio de Duplas (Pontos): ").append(vencedorTorneioDuplasPontos)
-                    .append(" - Prémio: ").append(premioDuplasPontos.getValor()).append("\n");
+                    .append(" - Premio: ").append(premioDuplasPontos.getValor()).append("\n");
         }
         if (vencedorTorneioDuplasEliminatorio != null) {
             Premio premioDuplasEliminatorias = new Premio("Duplas (Eliminatórias)", 40000);
             info.append("Vencedor do Torneio de Duplas (Eliminatórias): ").append(vencedorTorneioDuplasEliminatorio)
-                    .append(" - Prémio: ").append(premioDuplasEliminatorias.getValor()).append("\n");
+                    .append(" - Premio: ").append(premioDuplasEliminatorias.getValor()).append("\n");
         }
 
         JTextArea textArea = new JTextArea(info.toString());
